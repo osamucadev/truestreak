@@ -2,28 +2,28 @@ import "./EmptyState.scss";
 
 const EmptyState = ({ onCreateCycle }) => {
   return (
-    <div className="empty-state glass">
+    <div className="empty-state">
       <div className="empty-icon">💪</div>
 
-      <h2>Bem-vindo ao seu treino!</h2>
+      <h1>Bem-vindo ao seu treino!</h1>
 
-      <p className="empty-description">
+      <p className="subtitle">
         Você ainda não tem um treino cadastrado. Crie seu primeiro treino agora
         e comece sua jornada de constância real!
       </p>
 
-      <div className="empty-features">
-        <div className="feature-item">
-          <span className="feature-emoji">📅</span>
-          <span>Crie seus dias de treino</span>
+      <div className="features-grid">
+        <div className="feature-card">
+          <span className="icon">🗓️</span>
+          <span className="text">Crie seus dias de treino</span>
         </div>
-        <div className="feature-item">
-          <span className="feature-emoji">🏋️</span>
-          <span>Adicione seus exercícios</span>
+        <div className="feature-card">
+          <span className="icon">🏋️</span>
+          <span className="text">Adicione seus exercícios</span>
         </div>
-        <div className="feature-item">
-          <span className="feature-emoji">🎯</span>
-          <span>Acompanhe seu progresso</span>
+        <div className="feature-card">
+          <span className="icon">🎯</span>
+          <span className="text">Acompanhe seu progresso</span>
         </div>
       </div>
 

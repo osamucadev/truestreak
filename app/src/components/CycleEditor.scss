@@ -1,4 +1,5 @@
 @use "../styles/variables" as *;
+@use "sass:color";
 
 .cycle-editor {
   min-height: 100vh;
@@ -167,12 +168,12 @@
 
           &.mandatory {
             background: rgba($primary, 0.15);
-            color: darken($primary, 10%);
+            color: color.scale($primary, $lightness: -25%);
           }
 
           &.free {
             background: rgba($accent, 0.15);
-            color: darken($accent, 15%);
+            color: color.scale($accent, $lightness: -35%);
           }
         }
 
