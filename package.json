@@ -1,0 +1,22 @@
+{
+  "name": "truestreak",
+  "version": "1.0.0",
+  "private": true,
+  "description": "O app de treino que não te pune por ser humano",
+  "scripts": {
+    "dev:app": "cd app && npm run dev",
+    "dev:functions": "cd functions && npm run serve",
+    "build:app": "cd app && npm run build",
+    "deploy:app": "firebase deploy --only hosting:truestreak-app",
+    "deploy:functions": "firebase deploy --only functions",
+    "deploy": "firebase deploy"
+  },
+  "keywords": [
+    "fitness",
+    "workout",
+    "gamification",
+    "mental-health"
+  ],
+  "author": "Samuel Caetité",
+  "license": "MIT"
+}
