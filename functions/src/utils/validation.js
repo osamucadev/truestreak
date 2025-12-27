@@ -1,181 +1,146 @@
-/**
- * Validações compartilhadas para Cycles e Workouts
- */
-
-/**
- * Valida se um nome de ciclo é válido
- */
-export const validateCycleName = (name) => {
-  if (!name || typeof name !== "string") {
+function validateCycleName(name) {
+  if (!name || typeof name !== "string" || !name.trim()) {
     return { valid: false, error: "Nome do ciclo é obrigatório" };
   }
 
-  const trimmed = name.trim();
-  if (trimmed.length === 0) {
-    return { valid: false, error: "Nome do ciclo não pode ser vazio" };
-  }
-
-  if (trimmed.length > 100) {
-    return {
-      valid: false,
-      error: "Nome do ciclo muito longo (máx 100 caracteres)",
-    };
+  if (name.length > 100) {
+    return { valid: false, error: "Nome muito longo (máximo 100 caracteres)" };
   }
 
   return { valid: true };
-};
+}
 
-/**
- * Valida estrutura de um dia de treino
- */
-export const validateDay = (day, position) => {
-  if (!day || typeof day !== "object") {
-    return { valid: false, error: `Dia ${position + 1} inválido` };
-  }
-
-  // Validar nome do dia
-  if (
-    !day.name ||
-    typeof day.name !== "string" ||
-    day.name.trim().length === 0
-  ) {
-    return { valid: false, error: `Dia ${position + 1}: nome é obrigatório` };
-  }
-
-  if (day.name.trim().length > 100) {
-    return { valid: false, error: `Dia ${position + 1}: nome muito longo` };
-  }
-
-  // Validar isMandatory
-  if (typeof day.isMandatory !== "boolean") {
-    return {
-      valid: false,
-      error: `Dia ${position + 1}: tipo (obrigatório/livre) inválido`,
-    };
-  }
-
-  // Validar exercises (pode ser vazio)
-  if (!Array.isArray(day.exercises)) {
-    return {
-      valid: false,
-      error: `Dia ${position + 1}: lista de exercícios inválida`,
-    };
-  }
-
-  // Validar cada exercício
-  for (let i = 0; i < day.exercises.length; i++) {
-    const exerciseValidation = validateExercise(day.exercises[i], position, i);
-    if (!exerciseValidation.valid) {
-      return exerciseValidation;
-    }
-  }
-
-  return { valid: true };
-};
-
-/**
- * Valida estrutura de um exercício
- */
-export const validateExercise = (exercise, dayPosition, exercisePosition) => {
-  if (!exercise || typeof exercise !== "object") {
-    return {
-      valid: false,
-      error: `Dia ${dayPosition + 1}, Exercício ${
-        exercisePosition + 1
-      }: inválido`,
-    };
-  }
-
-  // Validar nome
+function validateExercise(exercise) {
   if (
     !exercise.name ||
     typeof exercise.name !== "string" ||
-    exercise.name.trim().length === 0
+    !exercise.name.trim()
   ) {
+    return { valid: false, error: "Nome do exercício é obrigatório" };
+  }
+
+  if (exercise.name.length > 200) {
     return {
       valid: false,
-      error: `Dia ${dayPosition + 1}, Exercício ${
-        exercisePosition + 1
-      }: nome é obrigatório`,
+      error: "Nome do exercício muito longo (máx 200 caracteres)",
     };
   }
 
-  if (exercise.name.trim().length > 200) {
+  if (
+    !exercise.setsReps ||
+    typeof exercise.setsReps !== "string" ||
+    !exercise.setsReps.trim()
+  ) {
+    return { valid: false, error: "Séries/repetições é obrigatório" };
+  }
+
+  if (exercise.setsReps && exercise.setsReps.length > 50) {
     return {
       valid: false,
-      error: `Dia ${dayPosition + 1}, Exercício ${
-        exercisePosition + 1
-      }: nome muito longo`,
+      error: "Séries/repetições muito longo (máx 50 caracteres)",
     };
   }
 
-  // Validar setsReps (opcional)
-  if (exercise.setsReps && typeof exercise.setsReps !== "string") {
-    return {
-      valid: false,
-      error: `Dia ${dayPosition + 1}, Exercício ${
-        exercisePosition + 1
-      }: séries/reps inválido`,
-    };
+  if (exercise.notes && exercise.notes.length > 500) {
+    return { valid: false, error: "Notas muito longas (máx 500 caracteres)" };
   }
 
-  // Validar notes (opcional)
-  if (exercise.notes && typeof exercise.notes !== "string") {
-    return {
-      valid: false,
-      error: `Dia ${dayPosition + 1}, Exercício ${
-        exercisePosition + 1
-      }: notas inválidas`,
-    };
+  // Validar steps (array opcional)
+  if (exercise.steps && !Array.isArray(exercise.steps)) {
+    return { valid: false, error: "Steps deve ser um array" };
   }
 
-  return { valid: true };
-};
-
-/**
- * Valida array de dias completo
- */
-export const validateDays = (days) => {
-  if (!Array.isArray(days)) {
-    return { valid: false, error: "Lista de dias inválida" };
+  if (exercise.steps && exercise.steps.length > 20) {
+    return { valid: false, error: "Máximo 20 passos por exercício" };
   }
 
-  if (days.length === 0) {
-    return { valid: false, error: "Ciclo precisa ter pelo menos 1 dia" };
+  if (exercise.steps) {
+    for (const step of exercise.steps) {
+      if (typeof step !== "string") {
+        return { valid: false, error: "Cada passo deve ser texto" };
+      }
+      if (step.length > 500) {
+        return {
+          valid: false,
+          error: "Passo muito longo (máx 500 caracteres)",
+        };
+      }
+    }
   }
 
-  if (days.length > 14) {
-    return { valid: false, error: "Ciclo não pode ter mais de 14 dias" };
+  // Validar tips (array opcional)
+  if (exercise.tips && !Array.isArray(exercise.tips)) {
+    return { valid: false, error: "Tips deve ser um array" };
   }
 
-  // Validar cada dia
-  for (let i = 0; i < days.length; i++) {
-    const dayValidation = validateDay(days[i], i);
-    if (!dayValidation.valid) {
-      return dayValidation;
+  if (exercise.tips && exercise.tips.length > 20) {
+    return { valid: false, error: "Máximo 20 dicas por exercício" };
+  }
+
+  if (exercise.tips) {
+    for (const tip of exercise.tips) {
+      if (typeof tip !== "string") {
+        return { valid: false, error: "Cada dica deve ser texto" };
+      }
+      if (tip.length > 500) {
+        return { valid: false, error: "Dica muito longa (máx 500 caracteres)" };
+      }
     }
   }
 
   return { valid: true };
-};
+}
 
-/**
- * Sanitiza e normaliza dados de um ciclo
- */
-export const sanitizeCycleData = (data) => {
+function validateDays(days) {
+  if (!Array.isArray(days) || days.length === 0) {
+    return { valid: false, error: "Ciclo deve ter pelo menos um dia" };
+  }
+
+  for (const day of days) {
+    if (!day.name || typeof day.name !== "string" || !day.name.trim()) {
+      return { valid: false, error: "Todos os dias devem ter nome" };
+    }
+
+    if (day.name.length > 50) {
+      return {
+        valid: false,
+        error: "Nome do dia muito longo (máximo 50 caracteres)",
+      };
+    }
+
+    if (!Array.isArray(day.exercises)) {
+      return { valid: false, error: "Formato inválido de exercícios" };
+    }
+
+    for (const exercise of day.exercises) {
+      const exerciseValidation = validateExercise(exercise);
+      if (!exerciseValidation.valid) {
+        return exerciseValidation;
+      }
+    }
+  }
+
+  return { valid: true };
+}
+
+function sanitizeCycleData(data) {
   return {
     name: data.name.trim(),
-    days: data.days.map((day, dayIndex) => ({
-      id: day.id || `day-${Date.now()}-${dayIndex}`,
-      position: dayIndex,
+    days: data.days.map((day, index) => ({
+      id: day.id || `day-${Date.now()}-${index}`,
+      position: index,
       name: day.name.trim(),
-      isMandatory: Boolean(day.isMandatory),
+      isMandatory: day.isMandatory ?? true,
       exercises: day.exercises.map((ex, exIndex) => ({
         id: ex.id || `ex-${Date.now()}-${exIndex}`,
         name: ex.name.trim(),
-        setsReps: ex.setsReps?.trim() || "",
-        notes: ex.notes?.trim() || "",
+        setsReps: (ex.setsReps || "").trim(),
+        notes: (ex.notes || "").trim(),
+        steps: ex.steps || [],
+        tips: ex.tips || [],
       })),
     })),
   };
-};
+}
+
+export { validateCycleName, validateDays, sanitizeCycleData, validateExercise };
