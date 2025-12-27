@@ -1,40 +1,47 @@
-// Colors - Tema Claro Vibrante
-$primary: #e879f9; // Rosa/magenta vibrante
-$secondary: #60a5fa; // Azul suave
-$accent: #34d399; // Verde menta
-$success: #10b981;
-$warning: #f59e0b;
+// Cores - Tema Escuro Vibrante
+$primary: #a855f7; // Roxo vibrante
+$secondary: #ec4899; // Rosa/magenta
+$accent: #8b5cf6; // Roxo médio
+$success: #10b981; // Verde
+$warning: #f59e0b; // Laranja
+$danger: #ef4444; // Vermelho
 
-// Background - Gradiente claro
-$bg-start: #e0f2fe; // Azul clarinho
-$bg-end: #fce7f3; // Rosa clarinho
-$background: linear-gradient(135deg, $bg-start 0%, $bg-end 100%);
+// Text (escuro)
+$text: #ffffff; // Branco
+$text-muted: #d1d5db; // Cinza claro
+$text-light: #9ca3af; // Cinza médio
 
-// Surface - Glassmorphism claro
-$surface: rgba(255, 255, 255, 0.4);
-$surface-hover: rgba(255, 255, 255, 0.6);
+// Backgrounds escuros
+$bg-base: #0f0a1e; // Roxo escuro base
+$surface: rgba(255, 255, 255, 0.08);
+$surface-hover: rgba(255, 255, 255, 0.12);
 
-// Text - Escuro em fundo claro
-$text: #1f2937; // Cinza escuro
-$text-muted: #6b7280; // Cinza médio
+// Glassmorphism estilo Figma
+$glass-blur: 40px;
+$glass-border: 1px solid rgba(255, 255, 255, 0.1);
+$glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 
-// Glassmorphism
-$glass-blur: 16px;
-$glass-opacity: 0.4;
-$glass-border: 1px solid rgba(255, 255, 255, 0.3);
-$glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+// Gradientes vibrantes
+$gradient-bg: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #3b2667 100%);
+$gradient-primary: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+$gradient-secondary: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+$gradient-accent: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
 
 // Spacing
-$spacing-xs: 4px;
-$spacing-sm: 8px;
-$spacing-md: 16px;
-$spacing-lg: 24px;
-$spacing-xl: 32px;
+$spacing-xs: 0.25rem; // 4px
+$spacing-sm: 0.5rem; // 8px
+$spacing-md: 1rem; // 16px
+$spacing-lg: 1.5rem; // 24px
+$spacing-xl: 2rem; // 32px
+$spacing-2xl: 3rem; // 48px
+$spacing-3xl: 4rem; // 64px
 
-// Border Radius
-$radius-sm: 8px;
-$radius-md: 12px;
-$radius-lg: 16px;
+// Border radius
+$radius-sm: 0.5rem; // 8px
+$radius-md: 1rem; // 16px
+$radius-lg: 1.25rem; // 20px
+$radius-xl: 1.5rem; // 24px
+$radius-2xl: 2rem; // 32px
 
 // Breakpoints
 $breakpoint-sm: 640px;

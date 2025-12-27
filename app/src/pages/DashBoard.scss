@@ -2,68 +2,80 @@
 
 .dashboard {
   min-height: 100vh;
-  padding: $spacing-lg;
+  padding: $spacing-2xl $spacing-lg;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .dashboard-header {
-  background: $surface;
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur($glass-blur);
   border: $glass-border;
-  border-radius: $radius-lg;
-  padding: $spacing-lg $spacing-xl;
-  margin-bottom: $spacing-xl;
+  border-radius: $radius-2xl;
+  padding: $spacing-xl $spacing-2xl;
+  margin-bottom: $spacing-2xl;
   box-shadow: $glass-shadow;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: $spacing-md;
+  gap: $spacing-lg;
 
   .user-info {
     display: flex;
     align-items: center;
-    gap: $spacing-md;
+    gap: $spacing-lg;
 
     .user-avatar {
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      border: 2px solid $primary;
+      border: 3px solid transparent;
+      background: $gradient-primary;
+      padding: 3px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
     }
 
     h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
+      font-size: 1.5rem;
+      font-weight: 700;
       color: $text;
-      margin: 0;
+      margin: 0 0 $spacing-xs 0;
     }
 
     .user-email {
-      font-size: 0.875rem;
+      font-size: 0.95rem;
       color: $text-muted;
       margin: 0;
     }
   }
 
   .btn-logout {
-    background: rgba(239, 68, 68, 0.1);
-    color: #dc2626;
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    padding: $spacing-sm $spacing-lg;
-    border-radius: $radius-md;
+    background: rgba($danger, 0.15);
+    color: #fca5a5;
+    border: 1px solid rgba($danger, 0.3);
+    padding: $spacing-md $spacing-xl;
+    border-radius: $radius-lg;
     font-weight: 600;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(239, 68, 68, 0.2);
+      background: rgba($danger, 0.25);
       transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba($danger, 0.3);
     }
   }
 }
 
 .dashboard-content {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -73,20 +85,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: $spacing-md;
+  gap: $spacing-lg;
 
   .loading-spinner {
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     border: 4px solid rgba($primary, 0.2);
     border-top-color: $primary;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    animation: spin 0.8s linear infinite;
   }
 
   p {
     color: $text-muted;
     font-weight: 500;
+    font-size: 1.1rem;
   }
 }
 
@@ -97,103 +110,113 @@
 }
 
 .active-cycle-card {
-  background: $surface;
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur($glass-blur);
   border: $glass-border;
-  border-radius: $radius-lg;
-  padding: $spacing-xl;
+  border-radius: $radius-2xl;
+  padding: $spacing-2xl;
   box-shadow: $glass-shadow;
   display: flex;
   flex-direction: column;
-  gap: $spacing-xl;
+  gap: $spacing-2xl;
 
   .cycle-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: $spacing-md;
-    padding-bottom: $spacing-lg;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    gap: $spacing-lg;
+    padding-bottom: $spacing-xl;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     h2 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: $text;
-      margin: 0 0 $spacing-xs 0;
+      font-size: 2rem;
+      font-weight: 800;
+      background: $gradient-primary;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0 0 $spacing-sm 0;
     }
 
     .cycle-meta {
       color: $text-muted;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      font-weight: 500;
       margin: 0;
     }
 
     .btn-edit {
-      background: rgba($primary, 0.1);
-      color: $primary;
-      border: 1px solid rgba($primary, 0.3);
-      padding: $spacing-sm $spacing-md;
-      border-radius: $radius-md;
+      background: $gradient-primary;
+      color: white;
+      border: none;
+      padding: $spacing-md $spacing-xl;
+      border-radius: $radius-lg;
       font-weight: 600;
+      font-size: 0.95rem;
       cursor: pointer;
       transition: all 0.3s ease;
       white-space: nowrap;
+      box-shadow: 0 8px 24px rgba($primary, 0.4);
 
       &:hover {
-        background: rgba($primary, 0.15);
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba($primary, 0.5);
       }
     }
   }
 }
 
 .current-day {
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: $radius-lg;
-  padding: $spacing-xl;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-2xl;
+  padding: $spacing-2xl;
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
+  gap: $spacing-lg;
 
   .day-badge {
-    background: linear-gradient(135deg, $primary, $secondary);
+    background: $gradient-secondary;
     color: white;
-    padding: $spacing-xs $spacing-md;
-    border-radius: $radius-sm;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $radius-lg;
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
     align-self: flex-start;
+    box-shadow: 0 4px 16px rgba($accent, 0.4);
   }
 
   h3 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: $text;
     margin: 0;
+    line-height: 1.3;
   }
 
   .day-type {
     display: flex;
-    gap: $spacing-sm;
+    gap: $spacing-md;
 
     .type-badge {
-      padding: $spacing-xs $spacing-md;
-      border-radius: $radius-sm;
-      font-size: 0.85rem;
+      padding: $spacing-sm $spacing-lg;
+      border-radius: $radius-md;
+      font-size: 0.9rem;
       font-weight: 600;
 
       &.mandatory {
-        background: rgba($primary, 0.15);
-        color: darken($primary, 10%);
+        background: rgba($primary, 0.2);
+        color: #e9d5ff;
+        border: 1px solid rgba($primary, 0.3);
       }
 
       &.free {
-        background: rgba($accent, 0.15);
-        color: darken($accent, 15%);
+        background: rgba($success, 0.2);
+        color: #a7f3d0;
+        border: 1px solid rgba($success, 0.3);
       }
     }
   }
@@ -201,9 +224,10 @@
   .exercises-preview {
     strong {
       display: block;
-      margin-bottom: $spacing-sm;
+      margin-bottom: $spacing-md;
       color: $text;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      font-weight: 600;
     }
 
     ul {
@@ -212,23 +236,25 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: $spacing-xs;
+      gap: $spacing-sm;
 
       li {
-        color: $text;
-        font-size: 0.95rem;
-        padding-left: $spacing-md;
+        color: $text-muted;
+        font-size: 1rem;
+        padding-left: $spacing-lg;
         position: relative;
+        line-height: 1.6;
 
         &::before {
-          content: "•";
+          content: "●";
           position: absolute;
           left: 0;
           color: $primary;
+          font-size: 1.2rem;
         }
 
         &.more {
-          color: $text-muted;
+          color: $text-light;
           font-style: italic;
         }
       }
@@ -236,66 +262,112 @@
   }
 
   .btn-start {
-    margin-top: $spacing-md;
-    background: linear-gradient(135deg, $primary, $secondary);
+    margin-top: $spacing-lg;
+    background: $gradient-primary;
     color: white;
     border: none;
-    padding: $spacing-md $spacing-xl;
-    border-radius: $radius-md;
-    font-size: 1rem;
-    font-weight: 600;
+    padding: $spacing-lg $spacing-2xl;
+    border-radius: $radius-xl;
+    font-size: 1.1rem;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba($primary, 0.3);
+    box-shadow: 0 8px 32px rgba($primary, 0.4);
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba($primary, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba($primary, 0.5);
+    }
+
+    &:active {
+      transform: translateY(-1px);
     }
   }
 }
 
 .quick-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: $spacing-md;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: $spacing-lg;
 
   .stat-item {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: $radius-md;
-    padding: $spacing-lg;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: $radius-2xl;
+    padding: $spacing-xl;
     text-align: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.09);
+      box-shadow: 0 8px 32px rgba($primary, 0.2);
+    }
 
     .stat-value {
-      font-size: 2rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, $primary, $secondary);
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: $gradient-primary;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      line-height: 1;
+      margin-bottom: $spacing-sm;
     }
 
     .stat-label {
       font-size: 0.85rem;
       color: $text-muted;
-      margin-top: $spacing-xs;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1.2px;
+      font-weight: 600;
     }
   }
 }
 
-// Responsive
+// Desktop
+@media (min-width: $breakpoint-lg) {
+  .dashboard {
+    padding: $spacing-3xl $spacing-2xl;
+  }
+
+  .dashboard-header {
+    padding: $spacing-2xl $spacing-3xl;
+  }
+
+  .active-cycle-card {
+    padding: $spacing-3xl;
+  }
+
+  .current-day {
+    padding: $spacing-3xl;
+
+    h3 {
+      font-size: 2.25rem;
+    }
+  }
+
+  .quick-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-xl;
+
+    .stat-item {
+      padding: $spacing-2xl;
+    }
+  }
+}
+
+// Mobile
 @media (max-width: $breakpoint-sm) {
   .dashboard {
-    padding: $spacing-md;
+    padding: $spacing-lg;
   }
 
   .dashboard-header {
     flex-direction: column;
     align-items: flex-start;
+    padding: $spacing-lg;
 
     .btn-logout {
       width: 100%;
@@ -308,6 +380,10 @@
     .cycle-header {
       flex-direction: column;
 
+      h2 {
+        font-size: 1.5rem;
+      }
+
       .btn-edit {
         width: 100%;
       }
@@ -318,11 +394,7 @@
     padding: $spacing-lg;
 
     h3 {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
     }
-  }
-
-  .quick-stats {
-    grid-template-columns: 1fr;
   }
 }
