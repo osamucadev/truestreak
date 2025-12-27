@@ -1,0 +1,163 @@
+@use "../styles/variables" as *;
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-lg;
+}
+
+.login-container {
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.login-brand {
+  text-align: center;
+
+  .logo-text {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, $primary, $secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: $spacing-sm;
+  }
+
+  .tagline {
+    color: $text-muted;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.login-box {
+  background: $surface;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border: $glass-border;
+  border-radius: $radius-lg;
+  padding: $spacing-xl * 1.5;
+  box-shadow: $glass-shadow;
+  text-align: center;
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $text;
+    margin-bottom: $spacing-sm;
+  }
+
+  .login-subtitle {
+    color: $text-muted;
+    margin-bottom: $spacing-xl;
+    font-size: 0.95rem;
+  }
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #dc2626;
+  padding: $spacing-md;
+  border-radius: $radius-sm;
+  margin-bottom: $spacing-lg;
+  font-size: 0.9rem;
+}
+
+.btn-google {
+  width: 100%;
+  background: white;
+  color: $text;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: $spacing-md $spacing-lg;
+  border-radius: $radius-md;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .google-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.privacy-note {
+  margin-top: $spacing-lg;
+  font-size: 0.8rem;
+  color: $text-muted;
+  line-height: 1.4;
+}
+
+.login-features {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    background: $surface;
+    backdrop-filter: blur($glass-blur);
+    border: $glass-border;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-md;
+    font-size: 0.9rem;
+    color: $text;
+
+    .feature-icon {
+      font-size: 1.2rem;
+    }
+
+    .feature-text {
+      font-weight: 500;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: $breakpoint-sm) {
+  .login-brand .logo-text {
+    font-size: 2.5rem;
+  }
+
+  .login-box {
+    padding: $spacing-xl;
+  }
+
+  .login-features {
+    flex-direction: column;
+
+    .feature {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

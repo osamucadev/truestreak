@@ -8,11 +8,14 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "deploy:firebase": "firebase deploy --only hosting:truestreak-app",
+    "deploy": "npm run build && npm run deploy:firebase",
     "start": "npm run dev"
   },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.1",
     "firebase": "^10.13.0"
   },
   "devDependencies": {
