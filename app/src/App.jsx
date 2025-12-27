@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
+import CycleEditorPage from "./pages/CycleEditorPage";
 
 function AppRoutes() {
   const { user, loading } = useAuth();
@@ -27,6 +28,22 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cycle/create"
+        element={
+          <ProtectedRoute>
+            <CycleEditorPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cycle/edit"
+        element={
+          <ProtectedRoute>
+            <CycleEditorPage />
           </ProtectedRoute>
         }
       />

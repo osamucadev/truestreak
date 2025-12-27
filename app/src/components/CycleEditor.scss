@@ -1,0 +1,336 @@
+@use "../styles/variables" as *;
+
+.cycle-editor {
+  min-height: 100vh;
+  padding: $spacing-lg;
+  padding-bottom: 100px;
+}
+
+.editor-header {
+  background: $surface;
+  backdrop-filter: blur($glass-blur);
+  border: $glass-border;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  margin-bottom: $spacing-xl;
+  box-shadow: $glass-shadow;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $text;
+    margin-bottom: $spacing-sm;
+  }
+
+  .subtitle {
+    color: $text-muted;
+    font-size: 0.95rem;
+  }
+}
+
+.editor-content {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.form-section {
+  background: $surface;
+  backdrop-filter: blur($glass-blur);
+  border: $glass-border;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $glass-shadow;
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-lg;
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: $text;
+    }
+
+    .badge {
+      background: rgba($primary, 0.1);
+      color: $primary;
+      padding: $spacing-xs $spacing-md;
+      border-radius: $radius-sm;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  span {
+    font-weight: 600;
+    color: $text;
+    font-size: 0.95rem;
+  }
+
+  small {
+    color: $text-muted;
+    font-size: 0.85rem;
+  }
+}
+
+.input-text {
+  width: 100%;
+  padding: $spacing-md;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: $radius-md;
+  font-size: 1rem;
+  background: white;
+  color: $text;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+
+  &::placeholder {
+    color: $text-muted;
+  }
+}
+
+.days-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+.day-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-md;
+
+  .day-info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    flex: 1;
+
+    .day-number {
+      background: linear-gradient(135deg, $primary, $secondary);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .day-details {
+      flex: 1;
+
+      h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: $text;
+        margin-bottom: $spacing-xs;
+      }
+
+      .day-meta {
+        display: flex;
+        gap: $spacing-md;
+        align-items: center;
+        font-size: 0.85rem;
+
+        .type-badge {
+          padding: $spacing-xs $spacing-sm;
+          border-radius: $radius-sm;
+          font-weight: 600;
+          font-size: 0.75rem;
+
+          &.mandatory {
+            background: rgba($primary, 0.15);
+            color: darken($primary, 10%);
+          }
+
+          &.free {
+            background: rgba($accent, 0.15);
+            color: darken($accent, 15%);
+          }
+        }
+
+        .exercises-count {
+          color: $text-muted;
+        }
+      }
+    }
+  }
+
+  .day-actions {
+    display: flex;
+    gap: $spacing-sm;
+  }
+}
+
+.btn-icon {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &.primary {
+    background: linear-gradient(135deg, $primary, $secondary);
+    border: none;
+    color: white;
+  }
+
+  &.danger {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #dc2626;
+
+    &:hover:not(:disabled) {
+      background: rgba(239, 68, 68, 0.2);
+    }
+  }
+}
+
+.btn-add {
+  width: 100%;
+  padding: $spacing-md;
+  background: rgba($primary, 0.1);
+  border: 2px dashed rgba($primary, 0.3);
+  border-radius: $radius-md;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba($primary, 0.15);
+    border-color: rgba($primary, 0.5);
+    transform: translateY(-2px);
+  }
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #dc2626;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.editor-actions {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: flex-end;
+
+  .btn {
+    padding: $spacing-md $spacing-xl;
+    border-radius: $radius-md;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-size: 1rem;
+
+    &.ghost {
+      background: rgba(0, 0, 0, 0.05);
+      color: $text;
+
+      &:hover:not(:disabled) {
+        background: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    &.primary {
+      background: linear-gradient(135deg, $primary, $secondary);
+      color: white;
+      box-shadow: 0 4px 16px rgba($primary, 0.3);
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba($primary, 0.4);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: $breakpoint-sm) {
+  .cycle-editor {
+    padding: $spacing-md;
+  }
+
+  .editor-header {
+    padding: $spacing-lg;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .form-section {
+    padding: $spacing-lg;
+  }
+
+  .day-card {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .day-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
+  .editor-actions {
+    flex-direction: column-reverse;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

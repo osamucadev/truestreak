@@ -1,12 +1,12 @@
-// Firebase SDK Configuration
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getFunctions } from "firebase/functions";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  connectAuthEmulator,
+} from "firebase/auth";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
-// Firebase config
-// IMPORTANTE: Substitua com suas credenciais do Firebase Console
-// Pegar em: https://console.firebase.google.com/project/truestreak-ed450/settings/general
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "COLE_AQUI_DEPOIS",
   authDomain:
@@ -21,18 +21,23 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID || "COLE_AQUI_DEPOIS",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize services
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const functions = getFunctions(app);
 export const googleProvider = new GoogleAuthProvider();
 
-// Configure Google Provider
 googleProvider.setCustomParameters({
   prompt: "select_account",
 });
+
+// 🔥 CONECTAR AOS EMULATORS EM DESENVOLVIMENTO
+if (import.meta.env.DEV) {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+  connectFirestoreEmulator(db, "127.0.0.1", 8080);
+  connectFunctionsEmulator(functions, "127.0.0.1", 5001);
+  console.log("🔧 Conectado aos Firebase Emulators");
+}
 
 export default app;

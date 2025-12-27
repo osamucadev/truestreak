@@ -1,0 +1,114 @@
+@use "../styles/variables" as *;
+
+.empty-state {
+  background: $surface;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border: $glass-border;
+  border-radius: $radius-lg;
+  padding: $spacing-xl * 3;
+  box-shadow: $glass-shadow;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+
+  .empty-icon {
+    font-size: 4rem;
+    margin-bottom: $spacing-lg;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $text;
+    margin-bottom: $spacing-md;
+  }
+
+  .empty-description {
+    color: $text-muted;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: $spacing-xl;
+  }
+
+  .empty-features {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl * 1.5;
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-md;
+      background: rgba(255, 255, 255, 0.2);
+      padding: $spacing-md $spacing-lg;
+      border-radius: $radius-md;
+      font-weight: 500;
+      color: $text;
+
+      .feature-emoji {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .btn-create-cycle {
+    background: linear-gradient(135deg, $primary, $secondary);
+    color: white;
+    border: none;
+    padding: $spacing-md * 1.5 $spacing-xl * 2;
+    border-radius: $radius-md;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba($primary, 0.3);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba($primary, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// Responsive
+@media (max-width: $breakpoint-sm) {
+  .empty-state {
+    padding: $spacing-xl * 2;
+
+    .empty-icon {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .empty-description {
+      font-size: 1rem;
+    }
+
+    .btn-create-cycle {
+      width: 100%;
+      padding: $spacing-md $spacing-xl;
+      font-size: 1rem;
+    }
+  }
+}

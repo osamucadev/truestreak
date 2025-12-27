@@ -1,8 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useCycles } from "../hooks/useCycles";
+import EmptyState from "../components/EmptyState";
 import "./Dashboard.scss";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { user, signOut } = useAuth();
+  const { activeCycle, loading } = useCycles();
 
   const handleSignOut = async () => {
     try {
@@ -11,6 +16,23 @@ const Dashboard = () => {
       console.error("Error signing out:", error);
     }
   };
+
+  const handleCreateCycle = () => {
+    navigate("/cycle/create");
+  };
+
+  const handleEditCycle = () => {
+    navigate("/cycle/edit");
+  };
+
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner"></div>
+        <p>Carregando...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard">
@@ -35,49 +57,89 @@ const Dashboard = () => {
       </header>
 
       <main className="dashboard-content">
-        <div className="welcome-card glass">
-          <h1>Bem-vindo ao TrueStreak! 🎉</h1>
-          <p className="subtitle">
-            Você está autenticado e pronto para começar sua jornada de
-            constância real.
-          </p>
-
-          <div className="status-grid">
-            <div className="status-item glass2">
-              <div className="status-icon">✅</div>
-              <div className="status-text">
-                <strong>Autenticação</strong>
-                <span>Funcionando</span>
+        {!activeCycle ? (
+          <EmptyState onCreateCycle={handleCreateCycle} />
+        ) : (
+          <div className="active-cycle-card glass">
+            <div className="cycle-header">
+              <div>
+                <h2>{activeCycle.name}</h2>
+                <p className="cycle-meta">
+                  {activeCycle.days?.length || 0} dias no ciclo
+                </p>
               </div>
+              <button className="btn-edit" onClick={handleEditCycle}>
+                ✏️ Editar
+              </button>
             </div>
 
-            <div className="status-item glass2">
-              <div className="status-icon">🔥</div>
-              <div className="status-text">
-                <strong>Firestore</strong>
-                <span>Configurado</span>
-              </div>
+            <div className="current-day glass2">
+              <div className="day-badge">Próximo treino</div>
+              {activeCycle.days && activeCycle.days.length > 0 ? (
+                <>
+                  <h3>
+                    Dia {activeCycle.currentPosition + 1}:{" "}
+                    {activeCycle.days[activeCycle.currentPosition]?.name}
+                  </h3>
+                  <div className="day-type">
+                    {activeCycle.days[activeCycle.currentPosition]
+                      ?.isMandatory ? (
+                      <span className="type-badge mandatory">
+                        ⚡ Obrigatório
+                      </span>
+                    ) : (
+                      <span className="type-badge free">🌟 Livre</span>
+                    )}
+                  </div>
+
+                  {activeCycle.days[activeCycle.currentPosition]?.exercises
+                    ?.length > 0 && (
+                    <div className="exercises-preview">
+                      <strong>Exercícios:</strong>
+                      <ul>
+                        {activeCycle.days[activeCycle.currentPosition].exercises
+                          .slice(0, 3)
+                          .map((ex) => (
+                            <li key={ex.id}>
+                              {ex.name} {ex.setsReps && `- ${ex.setsReps}`}
+                            </li>
+                          ))}
+                        {activeCycle.days[activeCycle.currentPosition].exercises
+                          .length > 3 && (
+                          <li className="more">
+                            +
+                            {activeCycle.days[activeCycle.currentPosition]
+                              .exercises.length - 3}{" "}
+                            exercícios
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+
+                  <button className="btn-start">Iniciar treino</button>
+                </>
+              ) : (
+                <p>Nenhum dia configurado</p>
+              )}
             </div>
 
-            <div className="status-item glass2">
-              <div className="status-icon">⚡</div>
-              <div className="status-text">
-                <strong>Functions</strong>
-                <span>Disponíveis</span>
+            <div className="quick-stats">
+              <div className="stat-item glass2">
+                <div className="stat-value">0</div>
+                <div className="stat-label">Streak</div>
+              </div>
+              <div className="stat-item glass2">
+                <div className="stat-value">0</div>
+                <div className="stat-label">Treinos</div>
+              </div>
+              <div className="stat-item glass2">
+                <div className="stat-value">1</div>
+                <div className="stat-label">Level</div>
               </div>
             </div>
           </div>
-
-          <div className="next-steps">
-            <h3>Próximos passos:</h3>
-            <ul>
-              <li>📝 Criar seu ciclo de treinos</li>
-              <li>💪 Registrar primeiro treino</li>
-              <li>🏆 Desbloquear conquistas</li>
-              <li>📊 Acompanhar progresso</li>
-            </ul>
-          </div>
-        </div>
+        )}
       </main>
     </div>
   );
