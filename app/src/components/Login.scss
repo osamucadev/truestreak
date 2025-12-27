@@ -9,37 +9,51 @@
 }
 
 .login-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur($glass-blur);
-  border: $glass-border;
+  background: rgba(255, 255, 255, 0.199);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 1);
   border-radius: $radius-2xl;
-  padding: $spacing-3xl $spacing-2xl;
-  box-shadow: $glass-shadow;
-  max-width: 480px;
+  padding: $spacing-2xl $spacing-xl;
+  box-shadow: 0 20px 60px rgba(31, 38, 135, 0.15);
+  max-width: 440px;
   width: 100%;
   text-align: center;
 
-  h1 {
+  .logo {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto $spacing-xl;
+    border-radius: 50%;
+    background: $gradient-primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 2rem;
-    font-weight: 800;
+    box-shadow: 0 10px 30px rgba($primary, 0.3);
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
     color: $text;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-sm;
     letter-spacing: -0.5px;
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: $text-muted;
     margin-bottom: $spacing-2xl;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   .btn-google {
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    color: #1f2937;
-    border: none;
+    background: white;
+    color: $text;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     padding: $spacing-lg $spacing-xl;
     border-radius: $radius-xl;
     font-size: 1rem;
@@ -50,12 +64,13 @@
     align-items: center;
     justify-content: center;
     gap: $spacing-md;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 
     &:hover {
-      background: white;
+      background: #fafafa;
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      border-color: rgba(0, 0, 0, 0.12);
     }
 
     &:active {
@@ -63,7 +78,7 @@
     }
 
     &:disabled {
-      opacity: 0.6;
+      opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
@@ -76,7 +91,7 @@
 
   .terms {
     margin-top: $spacing-xl;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: $text-light;
     line-height: 1.6;
 
@@ -92,9 +107,9 @@
   }
 
   .error-message {
-    background: rgba($danger, 0.15);
-    border: 1px solid rgba($danger, 0.3);
-    color: #fca5a5;
+    background: rgba($danger, 0.1);
+    border: 1px solid rgba($danger, 0.2);
+    color: darken($danger, 10%);
     padding: $spacing-md;
     border-radius: $radius-lg;
     margin-top: $spacing-lg;
@@ -102,13 +117,41 @@
   }
 }
 
-// Mobile
-@media (max-width: $breakpoint-sm) {
+// ✅ MIN-WIDTH = MOBILE-FIRST
+// Tablet e acima
+@media (min-width: $breakpoint-sm) {
   .login-card {
-    padding: $spacing-2xl $spacing-lg;
+    padding: $spacing-3xl $spacing-2xl;
+
+    .logo {
+      width: 72px;
+      height: 72px;
+      font-size: 2.25rem;
+    }
 
     h1 {
-      font-size: 1.75rem;
+      font-size: 1.875rem;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+// Desktop
+@media (min-width: $breakpoint-md) {
+  .login-card {
+    padding: $spacing-3xl;
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      font-size: 2.5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
     }
   }
 }

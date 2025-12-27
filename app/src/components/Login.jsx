@@ -25,11 +25,11 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-card glass">
-        <h1>Bem-vindo de volta!</h1>
-        <p className="subtitle">
-          Entre para continuar sua jornada de constância real
-        </p>
+      <div className="login-card">
+        <div className="logo">💪</div>
+
+        <h1>TrueStreak</h1>
+        <p className="subtitle">Sua jornada de constância real começa aqui</p>
 
         <button
           className="btn-google"
@@ -60,8 +60,8 @@ const Login = () => {
         {error && <div className="error-message">{error}</div>}
 
         <p className="terms">
-          Ao entrar, você concorda com nossos <a href="#">Termos de Uso</a> e{" "}
-          <a href="#">Política de Privacidade</a>
+          Ao continuar, você aceita nossos <a href="#">Termos</a> e{" "}
+          <a href="#">Privacidade</a>
         </p>
       </div>
     </div>

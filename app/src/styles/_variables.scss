@@ -1,31 +1,43 @@
-// Cores - Tema Escuro Vibrante
+// Cores - Tema Claro Pastel (baseado nas referências)
 $primary: #a855f7; // Roxo vibrante
-$secondary: #ec4899; // Rosa/magenta
+$secondary: #ec4899; // Rosa
 $accent: #8b5cf6; // Roxo médio
 $success: #10b981; // Verde
 $warning: #f59e0b; // Laranja
 $danger: #ef4444; // Vermelho
 
-// Text (escuro)
-$text: #ffffff; // Branco
-$text-muted: #d1d5db; // Cinza claro
-$text-light: #9ca3af; // Cinza médio
+// Text (claro)
+$text: #1f2937; // Quase preto
+$text-muted: #6b7280; // Cinza médio
+$text-light: #9ca3af; // Cinza claro
 
-// Backgrounds escuros
-$bg-base: #0f0a1e; // Roxo escuro base
-$surface: rgba(255, 255, 255, 0.08);
-$surface-hover: rgba(255, 255, 255, 0.12);
+// Backgrounds claros
+$bg-base: #ffffff;
 
-// Glassmorphism estilo Figma
-$glass-blur: 40px;
-$glass-border: 1px solid rgba(255, 255, 255, 0.1);
-$glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+// Glassmorphism MUITO sutil (quase branco)
+$surface: rgba(255, 255, 255, 0.7);
+$surface-hover: rgba(255, 255, 255, 0.85);
 
-// Gradientes vibrantes
-$gradient-bg: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #3b2667 100%);
+$glass-blur: 30px;
+$glass-border: 1px solid rgba(255, 255, 255, 0.5);
+$glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+
+// Gradientes QUENTES (rosa, laranja, amarelo, roxo)
+$gradient-bg: linear-gradient(
+  135deg,
+  #ff6b9d 0%,
+  // Rosa quente
+  #ffa06b 25%,
+  // Laranja coral
+  #ffd93d 50%,
+  // Amarelo quente
+  #c96dd8 75%,
+  // Roxo vibrante
+  #6e8eff 100% // Azul roxeado
+);
+
 $gradient-primary: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
 $gradient-secondary: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
-$gradient-accent: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
 
 // Spacing
 $spacing-xs: 0.25rem; // 4px
