@@ -2,6 +2,18 @@ import "./config/firebase-admin.js";
 import { onRequest } from "firebase-functions/v2/https";
 import { onCall } from "firebase-functions/v2/https";
 
+import {
+  createCycle,
+  updateCycleName,
+  updateCycleStructure,
+  getActiveCycle,
+  getCycleHistory,
+  logWorkout,
+  skipWorkout,
+  getWorkoutHistory,
+  getCurrentStats,
+} from "./api/cycles.js";
+
 // Test functions
 export const hello = onRequest((request, response) => {
   response.json({ message: "TrueStreak" });
@@ -22,4 +34,8 @@ export {
   updateCycleStructure,
   getActiveCycle,
   getCycleHistory,
-} from "./api/cycles.js";
+  logWorkout,
+  skipWorkout,
+  getWorkoutHistory,
+  getCurrentStats,
+};

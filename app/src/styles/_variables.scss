@@ -1,59 +1,59 @@
-// Cores - Tema Claro Pastel (baseado nas referências)
-$primary: #a855f7; // Roxo vibrante
-$secondary: #ec4899; // Rosa
+// Cores - Tema Dark Gym/Fitness
+$primary: #a855f7; // Roxo vibrante (acentos)
+$secondary: #ec4899; // Rosa forte (CTAs)
 $accent: #8b5cf6; // Roxo médio
 $success: #10b981; // Verde
 $warning: #f59e0b; // Laranja
 $danger: #ef4444; // Vermelho
 
-// Text (claro)
-$text: #1f2937; // Quase preto
-$text-muted: #6b7280; // Cinza médio
-$text-light: #9ca3af; // Cinza claro
+// Text (dark theme)
+$text: #ffffff; // Branco
+$text-muted: #d1d5db; // Cinza claro
+$text-light: #9ca3af; // Cinza médio
 
-// Backgrounds claros
-$bg-base: #ffffff;
+// Backgrounds DARK
+$bg-base: #0f0a1e; // Roxo muito escuro (quase preto)
 
-// Glassmorphism MUITO sutil (quase branco)
-$surface: rgba(255, 255, 255, 0.3);
-$surface-hover: rgba(255, 255, 255, 0.85);
+// Glassmorphism DARK
+$surface: rgba(255, 255, 255, 0.05);
+$surface-hover: rgba(255, 255, 255, 0.08);
 
-$glass-blur: 30px;
-$glass-border: 1px solid rgba(255, 255, 255, 0.5);
-$glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+$glass-blur: 40px;
+$glass-border: 1px solid rgba(255, 255, 255, 0.1);
+$glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 
-// Gradientes QUENTES (rosa, laranja, amarelo, roxo)
+// Gradiente ESCURO e sério (roxo escuro)
 $gradient-bg: linear-gradient(
   135deg,
-  #ff6b9d 0%,
-  // Rosa quente
-  #ffa06b 25%,
-  // Laranja coral
-  #ffd93d 50%,
-  // Amarelo quente
-  #c96dd8 75%,
-  // Roxo vibrante
-  #6e8eff 100% // Azul roxeado
+  #0f0a1e 0%,
+  // Roxo muito escuro
+  #1a0b2e 25%,
+  // Roxo escuro
+  #2d1b4e 50%,
+  // Roxo médio escuro
+  #1f1333 75%,
+  // Roxo escuro novamente
+  #0f0a1e 100% // Volta pro início
 );
 
 $gradient-primary: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
 $gradient-secondary: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
 
 // Spacing
-$spacing-xs: 0.25rem; // 4px
-$spacing-sm: 0.5rem; // 8px
-$spacing-md: 1rem; // 16px
-$spacing-lg: 1.5rem; // 24px
-$spacing-xl: 2rem; // 32px
-$spacing-2xl: 3rem; // 48px
-$spacing-3xl: 4rem; // 64px
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+$spacing-3xl: 4rem;
 
 // Border radius
-$radius-sm: 0.5rem; // 8px
-$radius-md: 1rem; // 16px
-$radius-lg: 1.25rem; // 20px
-$radius-xl: 1.5rem; // 24px
-$radius-2xl: 2rem; // 32px
+$radius-sm: 0.5rem;
+$radius-md: 1rem;
+$radius-lg: 1.25rem;
+$radius-xl: 1.5rem;
+$radius-2xl: 2rem;
 
 // Breakpoints
 $breakpoint-sm: 640px;

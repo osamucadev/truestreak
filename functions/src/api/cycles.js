@@ -346,3 +346,310 @@ export const getCycleHistory = onCall(async (request) => {
     throw new HttpsError("internal", "Erro ao buscar histórico de ciclos");
   }
 });
+
+export const logWorkout = onCall(async (request) => {
+  if (!request.auth) {
+    throw new HttpsError("unauthenticated", "Usuário não autenticado");
+  }
+
+  const userId = request.auth.uid;
+  const { cycleId, dayId, completedExercises, notes } = request.data;
+
+  if (!cycleId || !dayId) {
+    throw new HttpsError(
+      "invalid-argument",
+      "cycleId e dayId são obrigatórios"
+    );
+  }
+
+  if (!Array.isArray(completedExercises)) {
+    throw new HttpsError(
+      "invalid-argument",
+      "completedExercises deve ser array"
+    );
+  }
+
+  try {
+    const userRef = db.collection("users").doc(userId);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      throw new HttpsError("not-found", "Usuário não encontrado");
+    }
+
+    const userData = userDoc.data();
+    const cycles = userData.cycles || [];
+    const workouts = userData.workouts || [];
+    const stats = userData.stats || {
+      currentStreak: 0,
+      longestStreak: 0,
+      totalWorkouts: 0,
+      xp: 0,
+      level: 1,
+      lastWorkoutDate: null,
+      nextDayPosition: 0,
+    };
+
+    const activeCycle = cycles.find((c) => c.isActive);
+    if (!activeCycle || activeCycle.id !== cycleId) {
+      throw new HttpsError("not-found", "Ciclo ativo não encontrado");
+    }
+
+    const day = activeCycle.days.find((d) => d.id === dayId);
+    if (!day) {
+      throw new HttpsError("not-found", "Dia não encontrado");
+    }
+
+    const today = new Date().toISOString().split("T")[0];
+    const hasWorkoutToday = workouts.some(
+      (w) =>
+        w.date.startsWith(today) &&
+        w.completedExercises.some((e) => e.completed)
+    );
+
+    if (hasWorkoutToday) {
+      throw new HttpsError("already-exists", "Você já treinou hoje");
+    }
+
+    const wasFullyCompleted = completedExercises.every((e) => e.completed);
+    const hasAnyCompleted = completedExercises.some((e) => e.completed);
+
+    const newWorkout = {
+      id: `workout-${Date.now()}`,
+      cycleId,
+      dayId,
+      dayName: day.name,
+      dayPosition: day.position,
+      date: new Date().toISOString(),
+      completedExercises,
+      wasFullyCompleted,
+      wasMandatory: day.isMandatory,
+      skippedReason: null,
+      notes: notes || "",
+    };
+
+    workouts.push(newWorkout);
+
+    // Atualizar stats
+    if (hasAnyCompleted) {
+      stats.currentStreak += 1;
+      stats.totalWorkouts += 1;
+      stats.xp += 10;
+
+      if (wasFullyCompleted) {
+        stats.xp += 5;
+      }
+
+      if (stats.currentStreak > stats.longestStreak) {
+        stats.longestStreak = stats.currentStreak;
+      }
+
+      stats.level = Math.floor(stats.xp / 100) + 1;
+    }
+
+    stats.lastWorkoutDate = new Date().toISOString();
+    stats.nextDayPosition = (day.position + 1) % activeCycle.days.length;
+
+    await userRef.update({
+      workouts,
+      stats,
+    });
+
+    return {
+      success: true,
+      workout: newWorkout,
+      stats,
+    };
+  } catch (error) {
+    console.error("Error logging workout:", error);
+    if (error instanceof HttpsError) {
+      throw error;
+    }
+    throw new HttpsError("internal", "Erro ao registrar treino");
+  }
+});
+
+export const skipWorkout = onCall(async (request) => {
+  if (!request.auth) {
+    throw new HttpsError("unauthenticated", "Usuário não autenticado");
+  }
+
+  const userId = request.auth.uid;
+  const { cycleId, dayId, reason, nextDayChoice } = request.data;
+
+  if (!cycleId || !dayId || !reason) {
+    throw new HttpsError(
+      "invalid-argument",
+      "cycleId, dayId e reason são obrigatórios"
+    );
+  }
+
+  if (!["cant", "wont"].includes(reason)) {
+    throw new HttpsError(
+      "invalid-argument",
+      'reason deve ser "cant" ou "wont"'
+    );
+  }
+
+  try {
+    const userRef = db.collection("users").doc(userId);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      throw new HttpsError("not-found", "Usuário não encontrado");
+    }
+
+    const userData = userDoc.data();
+    const cycles = userData.cycles || [];
+    const workouts = userData.workouts || [];
+    const stats = userData.stats || {
+      currentStreak: 0,
+      longestStreak: 0,
+      totalWorkouts: 0,
+      xp: 0,
+      level: 1,
+      lastWorkoutDate: null,
+      nextDayPosition: 0,
+    };
+
+    const activeCycle = cycles.find((c) => c.isActive);
+    if (!activeCycle || activeCycle.id !== cycleId) {
+      throw new HttpsError("not-found", "Ciclo ativo não encontrado");
+    }
+
+    const day = activeCycle.days.find((d) => d.id === dayId);
+    if (!day) {
+      throw new HttpsError("not-found", "Dia não encontrado");
+    }
+
+    const skipWorkout = {
+      id: `workout-${Date.now()}`,
+      cycleId,
+      dayId,
+      dayName: day.name,
+      dayPosition: day.position,
+      date: new Date().toISOString(),
+      completedExercises: [],
+      wasFullyCompleted: false,
+      wasMandatory: day.isMandatory,
+      skippedReason: reason,
+      notes: "",
+    };
+
+    workouts.push(skipWorkout);
+
+    // Atualizar streak
+    if (day.isMandatory && reason === "wont") {
+      if (stats.currentStreak > stats.longestStreak) {
+        stats.longestStreak = stats.currentStreak;
+      }
+      stats.currentStreak = 0;
+    }
+
+    if (!day.isMandatory) {
+      stats.currentStreak += 1;
+    }
+
+    stats.lastWorkoutDate = new Date().toISOString();
+
+    // Definir próximo dia baseado na escolha
+    if (typeof nextDayChoice === "number") {
+      stats.nextDayPosition = nextDayChoice;
+    } else {
+      stats.nextDayPosition = (day.position + 1) % activeCycle.days.length;
+    }
+
+    await userRef.update({
+      workouts,
+      stats,
+    });
+
+    return {
+      success: true,
+      streakBroken: day.isMandatory && reason === "wont",
+      stats,
+      needsNextDayChoice: day.isMandatory,
+    };
+  } catch (error) {
+    console.error("Error skipping workout:", error);
+    if (error instanceof HttpsError) {
+      throw error;
+    }
+    throw new HttpsError("internal", "Erro ao registrar pulo de treino");
+  }
+});
+
+export const getWorkoutHistory = onCall(async (request) => {
+  if (!request.auth) {
+    throw new HttpsError("unauthenticated", "Usuário não autenticado");
+  }
+
+  const userId = request.auth.uid;
+  const { limit = 30 } = request.data;
+
+  try {
+    const userRef = db.collection("users").doc(userId);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      throw new HttpsError("not-found", "Usuário não encontrado");
+    }
+
+    const userData = userDoc.data();
+    const workouts = userData.workouts || [];
+
+    const sortedWorkouts = workouts
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, limit);
+
+    return {
+      success: true,
+      workouts: sortedWorkouts,
+    };
+  } catch (error) {
+    console.error("Error getting workout history:", error);
+    if (error instanceof HttpsError) {
+      throw error;
+    }
+    throw new HttpsError("internal", "Erro ao buscar histórico");
+  }
+});
+
+export const getCurrentStats = onCall(async (request) => {
+  if (!request.auth) {
+    throw new HttpsError("unauthenticated", "Usuário não autenticado");
+  }
+
+  const userId = request.auth.uid;
+
+  try {
+    const userRef = db.collection("users").doc(userId);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      throw new HttpsError("not-found", "Usuário não encontrado");
+    }
+
+    const userData = userDoc.data();
+    const stats = userData.stats || {
+      currentStreak: 0,
+      longestStreak: 0,
+      totalWorkouts: 0,
+      xp: 0,
+      level: 1,
+      lastWorkoutDate: null,
+      nextDayPosition: 0,
+    };
+
+    return {
+      success: true,
+      stats,
+    };
+  } catch (error) {
+    console.error("Error getting stats:", error);
+    if (error instanceof HttpsError) {
+      throw error;
+    }
+    throw new HttpsError("internal", "Erro ao buscar estatísticas");
+  }
+});

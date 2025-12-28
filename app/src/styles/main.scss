@@ -17,9 +17,8 @@ body {
   min-height: 100vh;
 }
 
-// Glassmorphism claro e sutil
 .glass {
-  background: $surface;
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur($glass-blur);
   -webkit-backdrop-filter: blur($glass-blur);
   border: $glass-border;
@@ -27,11 +26,11 @@ body {
 }
 
 .glass2 {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 4px 20px rgba(31, 38, 135, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .gradient-text {

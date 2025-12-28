@@ -1,11 +1,18 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
+// app/src/App.jsx
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import { useAuth } from "./contexts/AuthContext";
 import Login from "./components/Login";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import CycleEditorPage from "./pages/CycleEditorPage";
+import WorkoutSession from "./pages/WorkoutSession";
 
-function AppRoutes() {
+const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -17,48 +24,72 @@ function AppRoutes() {
     );
   }
 
-  return (
-    <Routes>
-      <Route
-        path="/login"
-        element={user ? <Navigate to="/" replace /> : <Login />}
-      />
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/cycle/create"
-        element={
-          <ProtectedRoute>
-            <CycleEditorPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/cycle/edit"
-        element={
-          <ProtectedRoute>
-            <CycleEditorPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
-  );
-}
+  return user ? children : <Navigate to="/login" />;
+};
+
+const PublicRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner"></div>
+        <p>Carregando...</p>
+      </div>
+    );
+  }
+
+  return !user ? children : <Navigate to="/" />;
+};
 
 function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
-    </BrowserRouter>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/cycle/create"
+            element={
+              <PrivateRoute>
+                <CycleEditorPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/cycle/edit"
+            element={
+              <PrivateRoute>
+                <CycleEditorPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/workout"
+            element={
+              <PrivateRoute>
+                <WorkoutSession />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

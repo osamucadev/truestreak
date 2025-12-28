@@ -1,5 +1,4 @@
 @use "../styles/variables" as *;
-@use "sass:color";
 
 .login-container {
   min-height: 100vh;
@@ -10,13 +9,13 @@
 }
 
 .login-card {
-  background: rgba(255, 255, 255, 0.199);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgba(255, 255, 255, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: $radius-2xl;
   padding: $spacing-2xl $spacing-xl;
-  box-shadow: 0 20px 60px rgba(31, 38, 135, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   max-width: 440px;
   width: 100%;
   text-align: center;
@@ -31,7 +30,7 @@
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    box-shadow: 0 10px 30px rgba($primary, 0.3);
+    box-shadow: 0 10px 30px rgba($primary, 0.5);
   }
 
   h1 {
@@ -53,8 +52,8 @@
   .btn-google {
     width: 100%;
     background: white;
-    color: $text;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #1f2937;
+    border: none;
     padding: $spacing-lg $spacing-xl;
     border-radius: $radius-xl;
     font-size: 1rem;
@@ -65,13 +64,12 @@
     align-items: center;
     justify-content: center;
     gap: $spacing-md;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
     &:hover {
-      background: #fafafa;
+      background: #f9fafb;
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-      border-color: rgba(0, 0, 0, 0.12);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     }
 
     &:active {
@@ -108,9 +106,9 @@
   }
 
   .error-message {
-    background: rgba($danger, 0.1);
-    border: 1px solid rgba($danger, 0.2);
-    color: color.scale($danger, $lightness: -25%);
+    background: rgba($danger, 0.15);
+    border: 1px solid rgba($danger, 0.3);
+    color: #fca5a5;
     padding: $spacing-md;
     border-radius: $radius-lg;
     margin-top: $spacing-lg;
@@ -118,8 +116,6 @@
   }
 }
 
-// ✅ MIN-WIDTH = MOBILE-FIRST
-// Tablet e acima
 @media (min-width: $breakpoint-sm) {
   .login-card {
     padding: $spacing-3xl $spacing-2xl;
@@ -140,7 +136,6 @@
   }
 }
 
-// Desktop
 @media (min-width: $breakpoint-md) {
   .login-card {
     padding: $spacing-3xl;
