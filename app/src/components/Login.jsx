@@ -25,7 +25,6 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="vignette" />
       <div className="login-card">
         <img src="/logo.png" alt="TrueStreak" className="logo" />
         <p className="subtitle">Sua jornada de constância real começa aqui</p>

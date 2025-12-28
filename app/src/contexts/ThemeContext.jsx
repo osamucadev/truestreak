@@ -1,30 +1,33 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import themes from "../themes/themes.json";
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(
-    localStorage.getItem("truestreak-theme") || "purple"
+    localStorage.getItem("truestreak-theme") || "orange"
   );
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+    const themeConfig = themes[theme];
+    if (!themeConfig) return;
+
+    const root = document.documentElement;
+
+    Object.entries(themeConfig).forEach(([key, value]) => {
+      root.style.setProperty(`--${key}`, value);
+    });
+
     localStorage.setItem("truestreak-theme", theme);
   }, [theme]);
 
-  const themes = ["purple", "green", "orange", "blue"];
+  const availableThemes = Object.keys(themes);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, themes }}>
+    <ThemeContext.Provider value={{ theme, setTheme, themes: availableThemes }}>
       {children}
     </ThemeContext.Provider>
   );
 };
 
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error("useTheme must be used within ThemeProvider");
-  }
-  return context;
-};
+export const useTheme = () => useContext(ThemeContext);
