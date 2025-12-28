@@ -4,19 +4,19 @@ import { useAuth } from "../contexts/AuthContext";
 import "./Login.scss";
 
 const Login = () => {
-  const navigate = useNavigate();
   const { signInWithGoogle } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleLogin = async () => {
     try {
       setLoading(true);
       setError("");
       await signInWithGoogle();
       navigate("/");
-    } catch (error) {
-      console.error("Error signing in:", error);
+    } catch (err) {
+      console.error("Error logging in:", err);
       setError("Erro ao fazer login. Tente novamente.");
     } finally {
       setLoading(false);
@@ -25,15 +25,14 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <div className="vignette" />
       <div className="login-card">
-        <div className="logo">💪</div>
-
-        <h1>TrueStreak</h1>
+        <img src="/logo.png" alt="TrueStreak" className="logo" />
         <p className="subtitle">Sua jornada de constância real começa aqui</p>
 
         <button
           className="btn-google"
-          onClick={handleGoogleSignIn}
+          onClick={handleGoogleLogin}
           disabled={loading}
         >
           <svg className="google-icon" viewBox="0 0 24 24">
@@ -57,12 +56,12 @@ const Login = () => {
           {loading ? "Entrando..." : "Continuar com Google"}
         </button>
 
-        {error && <div className="error-message">{error}</div>}
-
         <p className="terms">
-          Ao continuar, você aceita nossos <a href="#">Termos</a> e{" "}
-          <a href="#">Privacidade</a>
+          Ao continuar, você concorda com nossos <a href="#">Termos</a> e{" "}
+          <a href="#">Política de Privacidade</a>
         </p>
+
+        {error && <div className="error-message">{error}</div>}
       </div>
     </div>
   );

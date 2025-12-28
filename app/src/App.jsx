@@ -1,4 +1,3 @@
-// app/src/App.jsx
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,6 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { useAuth } from "./contexts/AuthContext";
 import Login from "./components/Login";
 import Dashboard from "./pages/Dashboard";
@@ -44,52 +44,54 @@ const PublicRoute = ({ children }) => {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/cycle/create"
-            element={
-              <PrivateRoute>
-                <CycleEditorPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/cycle/edit"
-            element={
-              <PrivateRoute>
-                <CycleEditorPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/workout"
-            element={
-              <PrivateRoute>
-                <WorkoutSession />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route
+              path="/login"
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/cycle/create"
+              element={
+                <PrivateRoute>
+                  <CycleEditorPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/cycle/edit"
+              element={
+                <PrivateRoute>
+                  <CycleEditorPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/workout"
+              element={
+                <PrivateRoute>
+                  <WorkoutSession />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 
