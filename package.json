@@ -10,7 +10,8 @@
     "deploy:app": "firebase deploy --only hosting:truestreak-app",
     "deploy:functions": "firebase deploy --only functions",
     "deploy": "firebase deploy",
-    "emulators": "firebase emulators:start --only auth,functions,firestore"
+    "emulators:fresh": "firebase emulators:start --only auth,functions,firestore --import=./firebase-emulator-data --export-on-exit",
+    "emulators": "firebase emulators:start --only auth,functions,firestore --import=./firebase-emulator-data --export-on-exit"
   },
   "keywords": [
     "fitness",

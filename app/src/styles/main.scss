@@ -14,10 +14,198 @@
 
 :root {
   transition: background-color 600ms ease, color 600ms ease;
+  --bg-base: #0f0f14; // grafite bem escuro
+  --bg-ink: #171725; // camada extra pra profundidade
+
+  /* Purple identity */
+  --bg-purple-1: rgba(122, 67, 255, 0.45);
+  --bg-purple-2: rgba(98, 47, 210, 0.35);
+  --bg-purple-3: rgba(62, 20, 160, 0.28);
+
+  /* Subtle highlights */
+  --bg-gold: rgba(214, 174, 92, 0.14);
+  --bg-green: rgba(83, 201, 140, 0.12);
+
+  /* Grain + vignette */
+  --bg-grain-1: rgba(255, 255, 255, 0.06);
+  --bg-grain-2: rgba(0, 0, 0, 0.18);
+  --bg-vignette: rgba(0, 0, 0, 0.55);
+
+  /* Controls */
+  --bg-blur: 0px; // se quiser um toque mais “cinematic”, tenta 6px nos shapes (mas custa mais)
 }
 
-body {background-image: 
-    url('/bg-purple.jpg');background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;}
+/* Remove a imagem antiga */
+body {
+  background: var(--bg-base);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Camadas do BG */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ::before = “pintura” principal */
+body::before {
+  /* A ordem importa: a primeira fica por cima */
+  background-image:
+    /* vignette */ radial-gradient(
+      1200px 700px at 50% 35%,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.12) 48%,
+      var(--bg-vignette) 100%
+    ),
+    /* subtle gold halo (mérito / recompensa) */
+      radial-gradient(
+        700px 320px at 48% 42%,
+        var(--bg-gold) 0%,
+        rgba(0, 0, 0, 0) 62%
+      ),
+    /* subtle green hint (progresso) */
+      radial-gradient(
+        640px 360px at 68% 60%,
+        var(--bg-green) 0%,
+        rgba(0, 0, 0, 0) 60%
+      ),
+    /* big angular planes (roxos) */
+      linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) 28%,
+        var(--bg-purple-3) 28%,
+        var(--bg-purple-3) 44%,
+        rgba(0, 0, 0, 0) 44%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+    linear-gradient(
+      315deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 58%,
+      var(--bg-purple-2) 58%,
+      var(--bg-purple-2) 72%,
+      rgba(0, 0, 0, 0) 72%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    /* soft depth wash */
+      radial-gradient(
+        1400px 900px at 20% 30%,
+        rgba(140, 90, 255, 0.1) 0%,
+        rgba(0, 0, 0, 0) 55%
+      ),
+    radial-gradient(
+      1200px 900px at 90% 70%,
+      rgba(110, 60, 255, 0.1) 0%,
+      rgba(0, 0, 0, 0) 58%
+    ),
+    /* base ink */
+      radial-gradient(
+        1200px 800px at 50% 50%,
+        var(--bg-ink) 0%,
+        var(--bg-base) 70%
+      );
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(var(--bg-blur));
+  transform: translateZ(0);
+}
+
+/* ::after = grain + micro-textura (sem imagem) */
+body::after {
+  /* “grain” com múltiplos padrões sobrepostos */
+  background-image: repeating-radial-gradient(
+      circle at 10% 20%,
+      var(--bg-grain-1) 0 1px,
+      rgba(0, 0, 0, 0) 1px 3px
+    ),
+    repeating-radial-gradient(
+      circle at 80% 60%,
+      rgba(255, 255, 255, 0.035) 0 1px,
+      rgba(0, 0, 0, 0) 1px 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.02) 0 1px,
+      rgba(0, 0, 0, 0) 1px 6px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.12) 0 1px,
+      rgba(0, 0, 0, 0) 1px 7px
+    );
+
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+  transform: translateZ(0);
+}
+
+/* ========
+   ANIMAÇÃO (só quando body tiver .animated-body)
+   - “vivo” com drift + leve parallax + grain breathing
+   ======== */
+
+body.animated-body::before {
+  animation: bg-drift 14s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+body.animated-body::after {
+  animation: bg-grain 6.5s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* Drift suave (não enjoo) */
+@keyframes bg-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(var(--bg-blur));
+  }
+  35% {
+    transform: translate3d(-1.2%, -0.8%, 0) scale(1.015);
+    filter: blur(var(--bg-blur));
+  }
+  70% {
+    transform: translate3d(1%, 0.9%, 0) scale(1.02);
+    filter: blur(var(--bg-blur));
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(var(--bg-blur));
+  }
+}
+
+/* Grain “respira” + dá sensação de textura viva */
+@keyframes bg-grain {
+  0% {
+    opacity: 0.5;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40% {
+    opacity: 0.62;
+    transform: translate3d(-0.6%, 0.4%, 0) scale(1.01);
+  }
+  75% {
+    opacity: 0.54;
+    transform: translate3d(0.5%, -0.5%, 0) scale(1.015);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* Acessibilidade: reduz movimento */
+@media (prefers-reduced-motion: reduce) {
+  body.animated-body::before,
+  body.animated-body::after {
+    animation: none !important;
+  }
+}

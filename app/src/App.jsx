@@ -12,6 +12,8 @@ import Dashboard from "./pages/Dashboard";
 import CycleEditorPage from "./pages/CycleEditorPage";
 import WorkoutSession from "./pages/WorkoutSession";
 import WorkoutHistory from "./pages/WorkoutHistory";
+import Stats from "./pages/Stats";
+import DevTools from "./pages/Devtools";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -94,6 +96,22 @@ function App() {
               element={
                 <PrivateRoute>
                   <WorkoutHistory />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/stats"
+              element={
+                <PrivateRoute>
+                  <Stats />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/dev"
+              element={
+                <PrivateRoute>
+                  <DevTools />
                 </PrivateRoute>
               }
             />

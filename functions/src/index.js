@@ -14,6 +14,8 @@ import {
   getCurrentStats,
 } from "./api/cycles.js";
 
+import { devPopulateWorkouts, devClearWorkouts } from "./api/dev.js";
+
 // Test functions
 export const hello = onRequest((request, response) => {
   response.json({ message: "TrueStreak" });
@@ -38,4 +40,6 @@ export {
   skipWorkout,
   getWorkoutHistory,
   getCurrentStats,
+  devPopulateWorkouts,
+  devClearWorkouts,
 };

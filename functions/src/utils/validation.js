@@ -1,3 +1,4 @@
+// functions\src\utils
 function validateCycleName(name) {
   if (!name || typeof name !== "string" || !name.trim()) {
     return { valid: false, error: "Nome do ciclo é obrigatório" };
