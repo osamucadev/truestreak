@@ -1,172 +1,139 @@
+// app/src/components/Login.scss
+
 .login-container {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: clamp(24px, 5vw, 64px);
-  position: relative;
-  overflow: hidden;
-  color: var(--text-primary);
-  background: var(--bg-base);
-
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        900px 600px at 55% 45%,
-        var(--glow-1),
-        transparent 62%
-      ),
-      radial-gradient(900px 650px at 62% 42%, var(--glow-2), transparent 62%),
-      radial-gradient(1100px 900px at 15% 80%, var(--glow-3), transparent 60%),
-      radial-gradient(1200px 900px at 85% 20%, var(--glow-4), transparent 62%),
-      linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
-
-    opacity: 1;
-    z-index: 1;
-    pointer-events: none;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
 }
 
 .login-card {
-  width: min(520px, 100%);
-  padding: clamp(26px, 5vw, 40px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2rem;
+  padding: 3rem 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  max-width: 440px;
+  width: 100%;
   text-align: center;
   position: relative;
-  z-index: 3;
-  border-radius: 28px;
 
-  background: var(--card-bg);
-  backdrop-filter: blur(18px) saturate(1.35);
-  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  .logo {
+    width: 120px;
+    height: auto;
+    margin: 0 auto 2rem;
+    display: block;
+    filter: drop-shadow(0 10px 30px rgba(var(--theme-primary-rgb), 0.5));
+  }
 
-  border: 1px solid var(--card-border);
-  box-shadow: 0 28px 110px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  .subtitle {
+    font-size: 0.95rem;
+    color: #d1d5db;
+    margin-bottom: 3rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
+  .btn-google {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    color: #1f2937;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    font-family: "Plus Jakarta Sans", sans-serif;
 
-    background: linear-gradient(
-      135deg,
-      var(--border-glow-1),
-      var(--border-glow-2),
-      var(--border-glow-3)
-    );
+    &:hover:not(:disabled) {
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(var(--theme-primary-rgb), 0.3);
+    }
 
-    -webkit-mask: linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+    &:active {
+      transform: translateY(0);
+    }
 
-    opacity: 0.95;
-    pointer-events: none;
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .google-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .terms {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    line-height: 1.6;
+
+    a {
+      color: rgb(var(--theme-primary-rgb));
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .error-message {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    padding: 1rem;
+    border-radius: 1.25rem;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
   }
 }
 
-.logo {
-  width: 192px;
-  height: auto;
-}
+// Tablet (640px+)
+@media (min-width: 640px) {
+  .login-card {
+    padding: 4rem 3rem;
 
-.subtitle {
-  margin: 10px auto 22px;
-  max-width: 34ch;
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--text-secondary);
-}
+    .logo {
+      width: 140px;
+    }
 
-.btn-google {
-  width: 100%;
-  height: 54px;
-  border-radius: 999px;
-
-  border: 1px solid var(--btn-border);
-  background: var(--btn-bg);
-  color: var(--btn-text);
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-
-  font-weight: 650;
-  font-size: 15px;
-  letter-spacing: -0.01em;
-  cursor: pointer;
-
-  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease,
-    opacity 180ms ease;
-
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34),
-    0 2px 0 rgba(255, 255, 255, 0.6) inset;
-
-  &:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 22px 58px rgba(0, 0, 0, 0.38),
-      0 2px 0 rgba(255, 255, 255, 0.66) inset;
-  }
-
-  &:active:not(:disabled) {
-    transform: translateY(0) scale(0.99);
-    filter: brightness(0.99);
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
-}
-
-.google-icon {
-  width: 20px;
-  height: 20px;
-}
-
-.terms {
-  margin-top: 16px;
-  font-size: 12.5px;
-  line-height: 1.45;
-  color: var(--text-muted);
-
-  a {
-    color: var(--link);
-    text-decoration: none;
-    border-bottom: 1px solid var(--link-border);
-    transition: border-color 180ms ease, color 180ms ease;
-
-    &:hover {
-      color: var(--link-hover);
-      border-bottom-color: var(--link-hover-border);
+    .subtitle {
+      font-size: 1rem;
     }
   }
 }
 
-.error-message {
-  margin-top: 14px;
-  padding: 10px 12px;
-  border-radius: 12px;
-
-  background: var(--error-bg);
-  border: 1px solid var(--error-border);
-  color: var(--error-text);
-
-  font-size: 13px;
-  line-height: 1.35;
-}
-
-@media (max-width: 420px) {
+// Desktop (768px+)
+@media (min-width: 768px) {
   .login-card {
-    border-radius: 24px;
-    padding: 22px;
-  }
+    padding: 6rem 4rem;
 
-  .btn-google {
-    height: 52px;
+    .logo {
+      width: 160px;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+    }
   }
 }

@@ -1,16 +1,6 @@
 import { useState } from "react";
+import { createEmptyExercise } from "../utils/cycleUtils";
 import "./DayEditor.scss";
-
-const createEmptyExercise = () => {
-  return {
-    id: `ex-${Date.now()}-${Math.random()}`,
-    name: "",
-    setsReps: "",
-    notes: "",
-    steps: [],
-    tips: [],
-  };
-};
 
 const DayEditor = ({ day, onSave, onCancel }) => {
   const [dayName, setDayName] = useState(day.name || "");

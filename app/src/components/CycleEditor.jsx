@@ -1,33 +1,14 @@
+// app/src/components/CycleEditor.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCycles } from "../hooks/useCycles";
+import { createEmptyDay } from "../utils/cycleUtils";
 import DayEditor from "./DayEditor";
 import "./CycleEditor.scss";
 
-const createEmptyDay = (position) => {
-  return {
-    id: `day-${Date.now()}-${Math.random()}`,
-    name: "",
-    position: position,
-    isMandatory: true,
-    exercises: [],
-  };
-};
-
-const createEmptyExercise = () => {
-  return {
-    id: `ex-${Date.now()}-${Math.random()}`,
-    name: "",
-    setsReps: "",
-    notes: "",
-    steps: [],
-    tips: [],
-  };
-};
-
 const CycleEditor = ({ cycleToEdit }) => {
   const navigate = useNavigate();
-  const { createCycle, updateCycleName, updateCycleStructure } = useCycles();
+  const { createCycle, updateCycleStructure } = useCycles();
 
   const [cycleName, setCycleName] = useState(cycleToEdit?.name || "");
   const [days, setDays] = useState(cycleToEdit?.days || [createEmptyDay(0)]);
@@ -98,31 +79,41 @@ const CycleEditor = ({ cycleToEdit }) => {
       return;
     }
 
+    const daysWithInvalidExercises = days.filter((day) =>
+      day.exercises.some((ex) => !ex.name.trim())
+    );
+    if (daysWithInvalidExercises.length > 0) {
+      setError("Todos os exercícios precisam ter nome");
+      return;
+    }
+
     try {
       setLoading(true);
       setError("");
 
-      // ✅ Garantir que steps e tips estão sendo enviados
-      const cleanedDays = days.map((day) => ({
-        ...day,
+      const cleanedDays = days.map((day, index) => ({
+        id: day.id,
+        name: day.name.trim(),
+        position: index,
+        isMandatory: day.isMandatory,
         exercises: day.exercises.map((ex) => ({
           id: ex.id,
-          name: ex.name,
-          setsReps: ex.setsReps,
-          notes: ex.notes || "",
-          steps: ex.steps || [], // ✅ Preservar steps
-          tips: ex.tips || [], // ✅ Preservar tips
+          name: ex.name.trim(),
+          setsReps: ex.setsReps?.trim() || "",
+          notes: ex.notes?.trim() || "",
+          steps: ex.steps || [],
+          tips: ex.tips || [],
         })),
       }));
 
       if (cycleToEdit) {
         await updateCycleStructure(cycleToEdit.id, {
-          name: cycleName,
+          name: cycleName.trim(),
           days: cleanedDays,
         });
       } else {
         await createCycle({
-          name: cycleName,
+          name: cycleName.trim(),
           days: cleanedDays,
         });
       }
@@ -235,12 +226,14 @@ const CycleEditor = ({ cycleToEdit }) => {
                     <button
                       className="btn-icon primary"
                       onClick={() => handleEditDay(day)}
+                      title="Editar dia"
                     >
                       ✏️
                     </button>
                     <button
                       className="btn-icon danger"
                       onClick={() => handleDeleteDay(day.id)}
+                      title="Excluir dia"
                     >
                       🗑️
                     </button>
