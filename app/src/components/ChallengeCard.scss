@@ -1,0 +1,359 @@
+// app/src/components/ChallengeCard.scss
+
+.challenge-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  }
+
+  // VERSÃO COMPACTA (Dashboard)
+  &.compact {
+    .challenge-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+
+      .challenge-icon {
+        font-size: 1.5rem;
+      }
+
+      .challenge-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        h4 {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #ffffff;
+          margin: 0;
+          font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .unviewed-dot {
+          color: #ef4444;
+          font-size: 0.5rem;
+          animation: pulse 2s infinite;
+        }
+      }
+    }
+
+    .tier-display {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+
+      .tier-icon {
+        font-size: 1.25rem;
+      }
+
+      .tier-name {
+        font-size: 0.9rem;
+        font-weight: 600;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+
+      .progress-fill {
+        height: 100%;
+        border-radius: 1rem;
+        transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+
+    .progress-text {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      text-align: center;
+      margin: 0;
+    }
+
+    .max-tier {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fbbf24;
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  // VERSÃO COMPLETA (Achievements Page)
+  &.full {
+    .challenge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+
+      .challenge-info {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+
+        .challenge-icon {
+          font-size: 2rem;
+          flex-shrink: 0;
+        }
+
+        h3 {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0 0 0.25rem 0;
+          font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .challenge-description {
+          font-size: 0.9rem;
+          color: #9ca3af;
+          margin: 0;
+        }
+      }
+
+      .unviewed-badge {
+        background: #ef4444;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        animation: pulse 2s infinite;
+      }
+    }
+
+    .tier-section {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      .current-tier {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex: 1;
+
+        .tier-icon-large {
+          font-size: 3rem;
+        }
+
+        .tier-info {
+          display: flex;
+          flex-direction: column;
+
+          .tier-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-bottom: 0.25rem;
+          }
+
+          .tier-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: "Plus Jakarta Sans", sans-serif;
+          }
+        }
+      }
+
+      .current-value {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .value-label {
+          font-size: 0.75rem;
+          color: #9ca3af;
+          margin-bottom: 0.25rem;
+        }
+
+        .value-number {
+          font-size: 1.75rem;
+          font-weight: 700;
+          color: #ffffff;
+          font-family: "Plus Jakarta Sans", sans-serif;
+        }
+      }
+    }
+
+    .progress-section {
+      margin-bottom: 1.5rem;
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.75rem;
+
+        .next-tier-label {
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #d1d5db;
+        }
+
+        .progress-percentage {
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: #ffffff;
+          font-family: "Plus Jakarta Sans", sans-serif;
+        }
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 12px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        overflow: hidden;
+        margin-bottom: 0.75rem;
+
+        .progress-fill {
+          height: 100%;
+          border-radius: 1rem;
+          transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 0 20px currentColor;
+        }
+      }
+
+      .remaining-text {
+        font-size: 0.85rem;
+        color: #9ca3af;
+        text-align: center;
+        margin: 0;
+      }
+    }
+
+    .max-tier-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1.5rem;
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      border-radius: 1rem;
+      margin-bottom: 1.5rem;
+
+      .max-tier-icon {
+        font-size: 2.5rem;
+      }
+
+      .max-tier-text {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fbbf24;
+        margin: 0;
+      }
+    }
+
+    .tier-history {
+      h4 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #9ca3af;
+        margin: 0 0 1rem 0;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      .history-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .history-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .history-tier-icon {
+          font-size: 1.5rem;
+          flex-shrink: 0;
+        }
+
+        .history-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          .history-tier-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: "Plus Jakarta Sans", sans-serif;
+          }
+
+          .history-date {
+            font-size: 0.75rem;
+            color: #9ca3af;
+          }
+        }
+
+        .history-new-badge {
+          background: #ef4444;
+          color: white;
+          font-size: 0.7rem;
+          font-weight: 700;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.5rem;
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 640px) {
+  .challenge-card.full {
+    .tier-section {
+      flex-direction: column;
+      gap: 1rem;
+
+      .current-value {
+        align-items: flex-start;
+      }
+    }
+  }
+}

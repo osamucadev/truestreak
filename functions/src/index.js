@@ -1,6 +1,8 @@
-import "./config/firebase-admin.js";
-import { onRequest } from "firebase-functions/v2/https";
-import { onCall } from "firebase-functions/v2/https";
+// functions/src/index.js
+import admin from "firebase-admin";
+
+// ✅ INICIALIZAR FIREBASE ADMIN ANTES DE IMPORTAR QUALQUER COISA
+admin.initializeApp();
 
 import {
   createCycle,
@@ -16,21 +18,14 @@ import {
 
 import { devPopulateWorkouts, devClearWorkouts } from "./api/dev.js";
 
-// Test functions
-export const hello = onRequest((request, response) => {
-  response.json({ message: "TrueStreak" });
-});
+import {
+  getUserChallenges,
+  markAchievementsAsViewed,
+} from "./api/challenges.js";
 
-export const helloCallable = onCall((request) => {
-  return {
-    message: "TrueStreak",
-    timestamp: new Date().toISOString(),
-    user: request.auth?.uid || "anonymous",
-  };
-});
-
-// Cycle management functions
+// Exportar todas as functions
 export {
+  // Cycles
   createCycle,
   updateCycleName,
   updateCycleStructure,
@@ -40,6 +35,12 @@ export {
   skipWorkout,
   getWorkoutHistory,
   getCurrentStats,
+
+  // Dev Tools
   devPopulateWorkouts,
   devClearWorkouts,
+
+  // Challenges
+  getUserChallenges,
+  markAchievementsAsViewed,
 };

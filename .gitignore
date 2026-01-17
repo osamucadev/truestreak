@@ -51,3 +51,5 @@ coverage/
 *.log
 .cache/
 misc/*.png
+
+firebase-emulator-data

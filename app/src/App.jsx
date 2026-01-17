@@ -14,6 +14,7 @@ import WorkoutSession from "./pages/WorkoutSession";
 import WorkoutHistory from "./pages/WorkoutHistory";
 import Stats from "./pages/Stats";
 import DevTools from "./pages/Devtools";
+import Achievements from "./pages/Achievements";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -104,6 +105,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Stats />
+                </PrivateRoute>
+              }
+            />{" "}
+            <Route
+              path="/achievements"
+              element={
+                <PrivateRoute>
+                  <Achievements />
                 </PrivateRoute>
               }
             />
