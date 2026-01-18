@@ -6,6 +6,7 @@ import "./WorkoutSession.scss";
 
 const WorkoutSession = () => {
   const navigate = useNavigate();
+  const { cycleId, dayId } = useParams(); // ✅ CORRIGIDO: usar os parâmetros da URL
   const { activeCycle, loading: cycleLoading } = useCycles();
   const { logWorkout, skipWorkout } = useWorkouts();
 
@@ -23,10 +24,20 @@ const WorkoutSession = () => {
 
   useEffect(() => {
     if (activeCycle && !cycleLoading) {
-      // Pegar o dia atual baseado no nextDayPosition (se tiver stats)
-      // Por enquanto, pega o primeiro dia
-      const day = activeCycle.days[0]; // TODO: usar stats.nextDayPosition
+      if (activeCycle.id !== cycleId) {
+        setError("Ciclo não encontrado");
+        return;
+      }
+
+      const day = activeCycle.days.find((d) => d.id === dayId);
+
+      if (!day) {
+        setError("Dia de treino não encontrado");
+        return;
+      }
+
       setCurrentDay(day);
+      setError(""); // Limpar erros anteriores
 
       // Inicializar exercícios como não completados
       const exercises = day.exercises.map((ex) => ({
@@ -36,7 +47,7 @@ const WorkoutSession = () => {
       }));
       setCompletedExercises(exercises);
     }
-  }, [activeCycle, cycleLoading]);
+  }, [activeCycle, cycleLoading, cycleId, dayId]);
 
   const toggleExercise = (exerciseId) => {
     setCompletedExercises((prev) =>
@@ -124,7 +135,31 @@ const WorkoutSession = () => {
     }
   };
 
-  if (cycleLoading || !currentDay) {
+  if (cycleLoading) {
+    return (
+      <div className="workout-session">
+        <div className="loading">
+          <div className="loading-spinner"></div>
+          <p>Carregando treino...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error && !currentDay) {
+    return (
+      <div className="workout-session">
+        <div className="session-content">
+          <div className="error-message">{error}</div>
+          <button className="btn-finish" onClick={() => navigate("/")}>
+            Voltar para Dashboard
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!currentDay) {
     return (
       <div className="workout-session">
         <div className="loading">

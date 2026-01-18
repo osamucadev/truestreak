@@ -85,7 +85,7 @@ function App() {
               }
             />
             <Route
-              path="/workout"
+              path="/workout/:cycleId/:dayId"
               element={
                 <PrivateRoute>
                   <WorkoutSession />
