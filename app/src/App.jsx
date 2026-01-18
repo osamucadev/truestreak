@@ -15,6 +15,7 @@ import WorkoutHistory from "./pages/WorkoutHistory";
 import Stats from "./pages/Stats";
 import DevTools from "./pages/Devtools";
 import Achievements from "./pages/Achievements";
+import AppFooter from "./components/AppFooter";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -65,6 +66,7 @@ function App() {
               element={
                 <PrivateRoute>
                   <Dashboard />
+                  <AppFooter />
                 </PrivateRoute>
               }
             />
@@ -73,6 +75,7 @@ function App() {
               element={
                 <PrivateRoute>
                   <CycleEditorPage />
+                  <AppFooter />
                 </PrivateRoute>
               }
             />
@@ -81,6 +84,7 @@ function App() {
               element={
                 <PrivateRoute>
                   <CycleEditorPage />
+                  <AppFooter />
                 </PrivateRoute>
               }
             />
@@ -89,6 +93,7 @@ function App() {
               element={
                 <PrivateRoute>
                   <WorkoutSession />
+                  <AppFooter />
                 </PrivateRoute>
               }
             />
@@ -97,6 +102,7 @@ function App() {
               element={
                 <PrivateRoute>
                   <WorkoutHistory />
+                  <AppFooter />
                 </PrivateRoute>
               }
             />
@@ -105,6 +111,7 @@ function App() {
               element={
                 <PrivateRoute>
                   <Stats />
+                  <AppFooter />
                 </PrivateRoute>
               }
             />{" "}
@@ -113,6 +120,7 @@ function App() {
               element={
                 <PrivateRoute>
                   <Achievements />
+                  <AppFooter />
                 </PrivateRoute>
               }
             />
@@ -121,6 +129,7 @@ function App() {
               element={
                 <PrivateRoute>
                   <DevTools />
+                  <AppFooter />
                 </PrivateRoute>
               }
             />

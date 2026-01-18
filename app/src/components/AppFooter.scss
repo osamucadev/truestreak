@@ -1,0 +1,202 @@
+// app/src/components/AppFooter.scss
+
+.app-footer {
+  background: var(--bg-surface);
+  border-radius: 1.5rem 1.5rem 0 0;
+  padding: 2rem 1.5rem;
+  margin: 3rem -1.5rem -100px;
+  box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    );
+  }
+
+  .footer-content {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .footer-feedback {
+    background: linear-gradient(
+      135deg,
+      var(--purple-primary),
+      var(--purple-light)
+    );
+    color: white;
+    border: none;
+    padding: 0.875rem 1.5rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-purple), 0 4px 12px rgba(122, 75, 255, 0.3);
+    font-family: "Plus Jakarta Sans", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        transparent 100%
+      );
+    }
+
+    .feedback-icon {
+      font-size: 1.25rem;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg), var(--shadow-purple),
+        0 8px 24px rgba(122, 75, 255, 0.4);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--purple-light);
+      outline-offset: 4px;
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+
+    a {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--purple-primary);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--purple-primary);
+        outline-offset: 4px;
+        border-radius: 0.25rem;
+      }
+    }
+
+    .separator {
+      color: var(--text-tertiary);
+      font-weight: 400;
+      user-select: none;
+    }
+  }
+
+  .footer-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+
+    p {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .footer-version {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--text-tertiary);
+      opacity: 0.7;
+    }
+
+    .footer-credit {
+      color: var(--text-secondary);
+
+      .heart {
+        color: var(--purple-primary);
+        filter: drop-shadow(0 0 8px var(--purple-glow));
+        animation: heartbeat 2s ease-in-out infinite;
+      }
+    }
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+// Responsividade
+@media (min-width: 640px) {
+  .app-footer {
+    padding: 2.5rem 2rem;
+    margin: 3rem -2rem -100px;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-footer {
+    padding: 3rem 2.5rem;
+    margin: 4rem -2.5rem -100px;
+
+    .footer-content {
+      gap: 2rem;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-footer {
+    padding: 3rem;
+    margin: 4rem -3rem -100px;
+  }
+}
+
+// Acessibilidade
+@media (prefers-reduced-motion: reduce) {
+  .footer-feedback,
+  .footer-links a {
+    transition: none !important;
+  }
+
+  .heart {
+    animation: none !important;
+  }
+}

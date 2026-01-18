@@ -23,6 +23,8 @@ import {
   markAchievementsAsViewed,
 } from "./api/challenges.js";
 
+import { submitFeedback } from "./api/submitFeedback.js";
+
 // Exportar todas as functions
 export {
   // Cycles
@@ -43,4 +45,7 @@ export {
   // Challenges
   getUserChallenges,
   markAchievementsAsViewed,
+
+  // Feedback
+  submitFeedback,
 };
