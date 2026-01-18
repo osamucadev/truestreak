@@ -1,0 +1,881 @@
+// ========================================
+// TRUESTREAK DOCS - styles.scss (/documentacao-tecnica)
+// Visual identity aligned with landing
+// ========================================
+
+// ========================================
+// VARIÁVEIS
+// ========================================
+$bg-primary: rgba(16, 18, 28, 0.45);
+$bg-secondary: rgba(16, 18, 28, 0.4);
+$bg-darker: rgba(10, 12, 20, 0.7);
+
+$purple-main: rgba(122, 75, 255, 0.65);
+$purple-dark: rgba(91, 52, 214, 0.55);
+$purple-light: rgba(180, 150, 255, 0.95);
+$purple-bg: rgba(122, 75, 255, 0.18);
+
+$gold: rgba(229, 210, 170, 0.95);
+
+$text-primary: rgba(240, 242, 255, 0.92);
+$text-secondary: rgba(235, 238, 255, 0.75);
+$text-muted: rgba(235, 238, 255, 0.6);
+
+$success-bg: rgba(16, 185, 129, 0.18);
+$success-text: rgba(110, 231, 183, 0.95);
+
+$info-bg: rgba(122, 75, 255, 0.16);
+$info-text: rgba(200, 185, 255, 0.95);
+
+$border: rgba(255, 255, 255, 0.08);
+$border-hover: rgba(255, 255, 255, 0.14);
+
+// Layout
+$radius-lg: 18px;
+$radius-md: 14px;
+$shadow-soft: 0 12px 35px rgba(0, 0, 0, 0.4),
+  inset 0 1px 0 rgba(255, 255, 255, 0.05);
+$shadow-hover: 0 18px 45px rgba(0, 0, 0, 0.45),
+  inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+// ========================================
+// RESET & BASE
+// ========================================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  line-height: 1.6;
+  background: #0a0c14;
+  background-image: radial-gradient(
+      at 20% 30%,
+      rgba(122, 75, 255, 0.08) 0,
+      transparent 50%
+    ),
+    radial-gradient(at 80% 70%, rgba(91, 52, 214, 0.06) 0, transparent 50%);
+  background-attachment: fixed;
+  color: $text-primary;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 2vw, 2rem);
+}
+
+section {
+  padding: clamp(3.5rem, 7vh, 5.5rem) 0;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: $text-muted;
+  text-align: center;
+  max-width: 760px;
+  margin: 0.9rem auto 2.5rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: $gold;
+  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  color: $text-primary;
+  text-align: center;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  color: $text-primary;
+}
+
+h4 {
+  font-size: 1.05rem;
+  color: $text-primary;
+}
+
+// ========================================
+// A11Y: SKIP LINK
+// ========================================
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid $border-hover;
+  border-radius: 12px;
+  color: $text-primary;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transform: translateY(-150%);
+  transition: transform 0.2s ease;
+  z-index: 2000;
+
+  &:focus {
+    transform: translateY(0);
+    outline: 2px solid rgba(180, 150, 255, 0.55);
+    outline-offset: 2px;
+  }
+}
+
+// ========================================
+// HEADER & NAVIGATION
+// ========================================
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: $bg-primary;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  border-bottom: 1px solid $border;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.nav {
+  padding: 1rem 0;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, $purple-main, $purple-light);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.75rem;
+
+  a {
+    color: $text-secondary;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: color 0.22s ease;
+
+    &:hover {
+      color: $purple-light;
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(180, 150, 255, 0.55);
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+  }
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem;
+  border-radius: 12px;
+
+  span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: $text-primary;
+    margin: 0.35rem 0;
+    transition: all 0.25s ease;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(180, 150, 255, 0.55);
+    outline-offset: 3px;
+  }
+}
+
+// ========================================
+// HERO
+// ========================================
+.hero-docs {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  padding-top: 8.5rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -25%;
+    right: -10%;
+    width: 70%;
+    height: 120%;
+    background: radial-gradient(
+      circle,
+      rgba(122, 75, 255, 0.16) 0%,
+      transparent 70%
+    );
+    animation: float 20s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 920px;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid $border;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+  margin: 0 auto 1.35rem;
+  width: fit-content;
+}
+
+.lead {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: $text-secondary;
+  margin: 1.25rem auto 1.75rem;
+  max-width: 740px;
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.4rem;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-28px) rotate(5deg);
+  }
+}
+
+// ========================================
+// BUTTONS
+// ========================================
+.btn {
+  display: inline-block;
+  padding: clamp(0.95rem, 1.5vw, 1.1rem) clamp(1.4rem, 3vw, 2.1rem);
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  border: none;
+
+  &:focus-visible {
+    outline: 2px solid rgba(180, 150, 255, 0.55);
+    outline-offset: 4px;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, $purple-main, $purple-dark);
+  color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5),
+    0 10px 26px rgba(122, 75, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.55),
+      0 14px 30px rgba(122, 75, 255, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid $border-hover;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// ========================================
+// CALLOUTS
+// ========================================
+.callout {
+  width: 100%;
+  max-width: 820px;
+  margin: 1.6rem auto 0;
+  padding: 1.1rem 1.2rem;
+  border-radius: $radius-md;
+  border: 1px solid $border;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+  text-align: left;
+
+  p {
+    color: $text-secondary;
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  a {
+    color: $purple-light;
+    font-weight: 800;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+}
+
+.callout-info {
+  background: $info-bg;
+  border-color: rgba(180, 150, 255, 0.18);
+
+  p {
+    color: rgba(240, 242, 255, 0.9);
+  }
+}
+
+.callout-success {
+  background: $success-bg;
+  border-color: rgba(110, 231, 183, 0.18);
+
+  p {
+    color: rgba(240, 242, 255, 0.9);
+  }
+}
+
+// ========================================
+// TOC
+// ========================================
+.toc {
+  padding-top: clamp(3rem, 6vh, 4.5rem);
+}
+
+.toc-nav {
+  max-width: 980px;
+  margin: 0 auto;
+  background: $bg-secondary;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  padding: clamp(1.25rem, 2vw, 1.6rem);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: $shadow-soft;
+}
+
+.toc-list {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+
+  > li > a {
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  a {
+    color: $text-secondary;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $purple-light;
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(180, 150, 255, 0.55);
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+  }
+
+  ol {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.35rem;
+
+    li {
+      list-style: decimal;
+      color: rgba(255, 255, 255, 0.35);
+    }
+  }
+}
+
+// ========================================
+// SECTION LAYOUT + CARDS
+// ========================================
+.section {
+  scroll-margin-top: 7.5rem;
+}
+
+.card {
+  background: $bg-secondary;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  padding: clamp(1.25rem, 2.3vw, 1.6rem);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: $shadow-soft;
+  transition: transform 0.22s ease, border-color 0.22s ease,
+    box-shadow 0.22s ease;
+  margin-bottom: 1.6rem;
+
+  &:hover {
+    border-color: $border-hover;
+    transform: translateY(-2px);
+    box-shadow: $shadow-hover;
+  }
+
+  p {
+    color: $text-secondary;
+    line-height: 1.75;
+  }
+
+  ul {
+    margin-top: 0.85rem;
+    padding-left: 1.1rem;
+    color: $text-secondary;
+
+    li {
+      margin: 0.4rem 0;
+      line-height: 1.7;
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mini-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  padding: 1.1rem 1.1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+  h4 {
+    margin-bottom: 0.6rem;
+  }
+
+  ul {
+    margin-top: 0.6rem;
+  }
+}
+
+.muted {
+  color: $text-muted;
+  font-size: 0.95rem;
+  margin-top: 0.85rem;
+}
+
+// ========================================
+// DETAILS (accordion)
+// ========================================
+.details {
+  margin-top: 1rem;
+  border-radius: $radius-md;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 0.95rem 1rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(180, 150, 255, 0.55);
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+
+    &::after {
+      content: "＋";
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.75);
+      transition: transform 0.2s ease;
+    }
+  }
+
+  &[open] summary::after {
+    content: "－";
+  }
+
+  > *:not(summary) {
+    padding: 0 1rem 1rem;
+  }
+}
+
+// ========================================
+// CATEGORIES
+// ========================================
+.categories {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.category {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: $radius-md;
+  padding: 1.1rem 1.1rem;
+  background: rgba(255, 255, 255, 0.02);
+
+  h4 {
+    margin-bottom: 0.55rem;
+  }
+
+  p {
+    margin-top: 0.25rem;
+  }
+}
+
+// ========================================
+// TABLE
+// ========================================
+.table-wrap {
+  margin-top: 1rem;
+  overflow: auto;
+  border-radius: $radius-md;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+
+  &:focus {
+    outline: 2px solid rgba(180, 150, 255, 0.55);
+    outline-offset: 4px;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+
+  thead th {
+    text-align: left;
+    padding: 0.95rem 1rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 900;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  tbody td {
+    padding: 0.85rem 1rem;
+    color: $text-secondary;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  tbody tr:hover td {
+    background: rgba(122, 75, 255, 0.06);
+  }
+}
+
+// ========================================
+// CODE BLOCKS
+// ========================================
+.code-block {
+  margin-top: 1rem;
+  border-radius: $radius-md;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+
+  .code-title {
+    padding: 0.8rem 1rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  pre {
+    padding: 0.95rem 1rem;
+    overflow: auto;
+  }
+
+  code {
+    color: rgba(240, 242, 255, 0.9);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    white-space: pre;
+  }
+}
+
+// ========================================
+// FAQ
+// ========================================
+.faq-list {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+// ========================================
+// BACK TO TOP
+// ========================================
+.back-to-top-wrap {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1200;
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid $border-hover;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 900;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(180, 150, 255, 0.55);
+    outline-offset: 4px;
+  }
+}
+
+// ========================================
+// FOOTER
+// ========================================
+.footer {
+  background: rgba(10, 12, 20, 0.9);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 3rem clamp(1rem, 2vw, 2rem) 2rem;
+  border-top: 1px solid $border;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section {
+  h4 {
+    color: $text-primary;
+    margin-bottom: 1rem;
+    font-weight: 800;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.62);
+  }
+}
+
+.footer-links {
+  list-style: none;
+
+  li {
+    margin-bottom: 0.65rem;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.62);
+    font-weight: 700;
+    transition: color 0.22s ease;
+
+    &:hover {
+      color: $purple-light;
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(180, 150, 255, 0.55);
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+  }
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+@media (max-width: 900px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .toc-nav {
+    padding: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: $bg-primary;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 1.4rem;
+    border-bottom: 1px solid $border;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+    gap: 0.9rem;
+
+    &.active {
+      display: flex;
+    }
+
+    a {
+      font-size: 1.05rem;
+      padding: 0.45rem 0;
+    }
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .hero-docs {
+    padding-top: 7.2rem;
+    min-height: auto;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  .back-to-top-wrap {
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

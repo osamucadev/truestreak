@@ -1,0 +1,30 @@
+{
+  "title": "Documentação Técnica | TrueStreak",
+  "description": "Documentação técnica do TrueStreak com regras detalhadas de ciclos, progressão, conquistas, estágios e cálculos. Transparência total sobre como o sistema funciona.",
+  "keywords": "documentação técnica fitness, regras de progresso fitness, ciclos de treino, sistema de conquistas, streak fitness, acompanhamento de atividades, tracker de atividades físicas, metodologia técnica fitness",
+  "author": "TrueStreak",
+  "type": "website",
+  "locale": "pt_BR",
+  "siteName": "TrueStreak",
+  "twitterCard": "summary_large_image",
+  "image": "/assets/og-documentacao.jpg",
+  "sitemap": {
+    "priority": "0.6",
+    "changefreq": "monthly"
+  },
+  "structuredData": {
+    "@type": "TechArticle",
+    "headline": "Documentação Técnica do TrueStreak",
+    "description": "Página com especificações técnicas sobre ciclos, progressão, conquistas e cálculos do sistema TrueStreak.",
+    "author": {
+      "@type": "Organization",
+      "name": "TrueStreak"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TrueStreak"
+    },
+    "inLanguage": "pt-BR",
+    "isAccessibleForFree": true
+  }
+}
