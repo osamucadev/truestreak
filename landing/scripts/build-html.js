@@ -208,13 +208,35 @@ function replaceImageReferences(html) {
     const webpVersion = versions.find((v) => v.type === "webp");
     const originalOptimized = versions.find((v) => v.type !== "webp");
 
-    if (webpVersion && originalOptimized) {
-      // Substituir <img src="..."> por <picture> com WebP
+    if (!originalOptimized) continue;
+
+    // Escapar caracteres especiais para regex
+    const escapedPath = originalPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+    // 1. Substituir em meta tags Open Graph e Twitter (usa versão otimizada, não WebP)
+    const metaRegex = new RegExp(
+      `(<meta[^>]*?(?:property|name)=["'](?:og:image|twitter:image)["'][^>]*?content=["'])${escapedPath}(["'][^>]*?>)`,
+      "gi"
+    );
+    updatedHtml = updatedHtml.replace(
+      metaRegex,
+      `$1${originalOptimized.url}$2`
+    );
+
+    // 2. Substituir em URLs absolutas (com https://)
+    const absoluteUrlRegex = new RegExp(
+      `(https?://[^"'\\s]+)${escapedPath}`,
+      "gi"
+    );
+    updatedHtml = updatedHtml.replace(
+      absoluteUrlRegex,
+      `$1${originalOptimized.url}`
+    );
+
+    // 3. Substituir <img src="..."> por <picture> com WebP (só se tiver WebP)
+    if (webpVersion) {
       const imgRegex = new RegExp(
-        `<img([^>]*?)src=["']${originalPath.replace(
-          /[.*+?^${}()|[\]\\]/g,
-          "\\$&"
-        )}["']([^>]*?)>`,
+        `<img([^>]*?)src=["']${escapedPath}["']([^>]*?)>`,
         "gi"
       );
 
@@ -232,13 +254,21 @@ function replaceImageReferences(html) {
         }${before}${after}>
 </picture>`;
       });
-    } else if (originalOptimized) {
-      // Se não tiver WebP, só substituir a URL
+    } else {
+      // 4. Se não tiver WebP, substituir apenas a URL em tags <img>
+      const imgSimpleRegex = new RegExp(
+        `(<img[^>]*?src=["'])${escapedPath}(["'][^>]*?>)`,
+        "gi"
+      );
       updatedHtml = updatedHtml.replace(
-        new RegExp(originalPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"),
-        originalOptimized.url
+        imgSimpleRegex,
+        `$1${originalOptimized.url}$2`
       );
     }
+
+    // 5. Substituir qualquer outra referência genérica que sobrou
+    const genericRegex = new RegExp(escapedPath, "g");
+    updatedHtml = updatedHtml.replace(genericRegex, originalOptimized.url);
   }
 
   return updatedHtml;

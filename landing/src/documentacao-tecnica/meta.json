@@ -7,7 +7,7 @@
   "locale": "pt_BR",
   "siteName": "TrueStreak",
   "twitterCard": "summary_large_image",
-  "image": "/assets/og-documentacao.jpg",
+  "image": "/assets/og-image.png",
   "sitemap": {
     "priority": "0.6",
     "changefreq": "monthly"
