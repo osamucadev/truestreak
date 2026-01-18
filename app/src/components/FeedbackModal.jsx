@@ -5,17 +5,25 @@ import "./FeedbackModal.scss";
 
 const FeedbackModal = ({ isOpen, onClose }) => {
   const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const { submitFeedback, isSubmitting, error } = useFeedback();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const success = await submitFeedback(message);
+    const success = await submitFeedback({
+      message,
+      name: name.trim() || null,
+      email: email.trim() || null,
+    });
 
     if (success) {
       setShowSuccess(true);
       setMessage("");
+      setName("");
+      setEmail("");
 
       // Fechar automaticamente após 2 segundos
       setTimeout(() => {
@@ -28,6 +36,8 @@ const FeedbackModal = ({ isOpen, onClose }) => {
   const handleClose = () => {
     if (!isSubmitting) {
       setMessage("");
+      setName("");
+      setEmail("");
       setShowSuccess(false);
       onClose();
     }
@@ -82,9 +92,61 @@ const FeedbackModal = ({ isOpen, onClose }) => {
                   rows={6}
                   disabled={isSubmitting}
                   autoFocus
+                  required
                 />
                 {error && <p className="error-message">{error}</p>}
               </div>
+
+              <div className="optional-section">
+                <p className="optional-header">
+                  <span className="optional-badge">Opcional</span>
+                  Quer receber uma resposta nossa?
+                </p>
+                <p className="optional-description">
+                  Deixe seu nome e email abaixo. Prometemos que{" "}
+                  <strong>não enviaremos spam</strong> — usaremos apenas para
+                  responder seu feedback diretamente (um humano da nossa equipe,
+                  não robô! 🤖❌).
+                </p>
+
+                <div className="optional-fields">
+                  <div className="form-group">
+                    <label htmlFor="feedback-name">Nome (opcional)</label>
+                    <input
+                      type="text"
+                      id="feedback-name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Como podemos te chamar?"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="feedback-email">Email (opcional)</label>
+                    <input
+                      type="email"
+                      id="feedback-email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="seu@email.com"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <p className="privacy-notice">
+                Ao enviar, você concorda com nossa{" "}
+                <a
+                  href="https://truestreak.life/privacidade"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Política de Privacidade
+                </a>
+                .
+              </p>
 
               <div className="form-actions">
                 <button

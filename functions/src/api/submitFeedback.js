@@ -12,7 +12,7 @@ export const submitFeedback = onCall(
       throw new HttpsError("unauthenticated", "Usuário não autenticado");
     }
 
-    const { message } = request.data;
+    const { message, name, email } = request.data;
     const userId = request.auth.uid;
 
     // Validações
@@ -36,6 +36,37 @@ export const submitFeedback = onCall(
       );
     }
 
+    // Validar nome (se fornecido)
+    if (name !== null && name !== undefined) {
+      if (typeof name !== "string" || name.trim().length === 0) {
+        throw new HttpsError("invalid-argument", "Nome inválido");
+      }
+      if (name.trim().length > 100) {
+        throw new HttpsError(
+          "invalid-argument",
+          "Nome muito longo. Máximo 100 caracteres."
+        );
+      }
+    }
+
+    // Validar email (se fornecido)
+    if (email !== null && email !== undefined) {
+      if (typeof email !== "string" || email.trim().length === 0) {
+        throw new HttpsError("invalid-argument", "Email inválido");
+      }
+      // Regex básico para validar email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.trim())) {
+        throw new HttpsError("invalid-argument", "Formato de email inválido");
+      }
+      if (email.trim().length > 200) {
+        throw new HttpsError(
+          "invalid-argument",
+          "Email muito longo. Máximo 200 caracteres."
+        );
+      }
+    }
+
     try {
       // Salvar feedback no Firestore
       const feedbackData = {
@@ -44,6 +75,15 @@ export const submitFeedback = onCall(
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         status: "new",
       };
+
+      // Adicionar nome e email apenas se fornecidos
+      if (name && name.trim().length > 0) {
+        feedbackData.name = name.trim();
+      }
+
+      if (email && email.trim().length > 0) {
+        feedbackData.email = email.trim();
+      }
 
       const docRef = await admin
         .firestore()
