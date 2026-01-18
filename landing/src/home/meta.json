@@ -1,44 +1,34 @@
 {
-  "title": "TrueStreak - Dias difíceis não apagam o teu progresso",
-  "description": "O app fitness onde dias difíceis não apagam seu progresso e todo esforço é recompensado. Acompanhe sua jornada com reconhecimento real. Consistência é vida real, não perfeição.",
-  "keywords": "fitness app, workout tracker, treino consistente, app treino, academia, motivação fitness, registro treino, progresso fitness, consistência, pausas não punem, reconhecimento real, gamificação fitness, truestreak",
+  "title": "TrueStreak | Dias difíceis não apagam seu progresso",
+  "description": "TrueStreak é um app de atividades físicas que valoriza constância real, não perfeição. Registre sua jornada, reconheça cada esforço e mantenha progresso mesmo nos dias difíceis.",
+  "keywords": "app de atividade física, app fitness, registro de atividades, consistência sem punição, progresso real, rotina flexível, tracker de hábitos físicos, bem-estar, constância, reconhecimento de esforço",
   "author": "TrueStreak",
-  "image": "/assets/og-home.jpg",
   "type": "website",
   "locale": "pt_BR",
   "siteName": "TrueStreak",
   "twitterCard": "summary_large_image",
+  "image": "/assets/og-home.jpg",
   "sitemap": {
     "priority": "1.0",
     "changefreq": "weekly"
   },
   "structuredData": {
-    "type": "WebApplication",
+    "@type": "WebApplication",
     "name": "TrueStreak",
-    "description": "App fitness que valoriza todo seu esforço e entende que dias difíceis fazem parte da jornada. Consistência é vida real, não perfeição.",
+    "description": "Aplicativo de bem-estar e atividade física que reconhece esforço real e entende que pausas fazem parte do processo. Consistência é vida real, não perfeição.",
     "applicationCategory": "HealthApplication",
     "operatingSystem": "Web",
     "url": "https://truestreak.life",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "BRL"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "ratingCount": "1"
-    },
     "author": {
       "@type": "Organization",
       "name": "TrueStreak"
     },
     "featureList": [
-      "Registro de treinos sem punição por pausas",
-      "Progresso acumulativo e real",
-      "Sistema de reconhecimento por esforço",
-      "Visualização completa da jornada fitness",
-      "Gamificação gentil e acolhedora"
+      "Registro de atividades físicas sem punição por pausas",
+      "Acompanhamento de progresso acumulativo",
+      "Reconhecimento por constância e esforço",
+      "Histórico completo da jornada",
+      "Rotinas flexíveis e adaptáveis à vida real"
     ]
   }
 }

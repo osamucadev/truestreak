@@ -5,19 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
+    <a class="skip-link" href="#inicio">Pular para o conteúdo</a>
+
     <header class="header">
-      <nav class="nav">
+      <nav class="nav" aria-label="Navegação principal">
         <div class="container">
-          <a href="/" class="logo">TrueStreak</a>
-          <button class="mobile-menu-btn" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
+          <a href="/" class="logo" aria-label="TrueStreak, página inicial"
+            >TrueStreak</a
+          >
+
+          <button
+            class="mobile-menu-btn"
+            type="button"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
           </button>
-          <ul class="nav-links">
+
+          <ul class="nav-links" id="nav-links">
+            <li><a href="#inicio">Início</a></li>
             <li><a href="#manifesto">Manifesto</a></li>
             <li><a href="#como-funciona">Como Funciona</a></li>
             <li><a href="#valores">Valores</a></li>
+            <li><a href="/metodologia">Metodologia</a></li>
           </ul>
         </div>
       </nav>
@@ -29,9 +43,10 @@
           <h1 class="hero-title">Dias difíceis não apagam seu progresso</h1>
           <p class="hero-subtitle">Consistência é vida real, não perfeição.</p>
           <p class="hero-description">
-            Acompanhe sua jornada fitness com um app que valoriza cada treino e
-            entende que pausas fazem parte do caminho.
+            Acompanhe sua jornada com um app fitness que valoriza cada atividade
+            e entende que pausas fazem parte do caminho.
           </p>
+
           <div class="hero-cta">
             <a href="https://app.truestreak.life" class="btn btn-primary"
               >Começar sem pressão</a
@@ -43,19 +58,19 @@
         </div>
       </section>
 
-      <section class="identification">
+      <section class="identification" aria-label="Para quem é o TrueStreak">
         <div class="container">
           <div class="identification-grid">
             <div class="identification-item">
-              <span class="emoji">🔄</span>
+              <span class="emoji" aria-hidden="true">🔄</span>
               <p>Feito para quem recomeça</p>
             </div>
             <div class="identification-item">
-              <span class="emoji">🧠</span>
+              <span class="emoji" aria-hidden="true">🧠</span>
               <p>Feito para rotina imperfeita</p>
             </div>
             <div class="identification-item">
-              <span class="emoji">🤍</span>
+              <span class="emoji" aria-hidden="true">🤍</span>
               <p>Feito para consistência gentil</p>
             </div>
           </div>
@@ -68,50 +83,58 @@
 
           <div class="manifesto-pillars">
             <div class="pillar">
-              <span class="pillar-icon">📈</span>
-              <h3>Dias Difíceis Não Apagam o Teu Progresso</h3>
+              <span class="pillar-icon" aria-hidden="true">📈</span>
+              <h3>Dias difíceis não apagam o teu progresso</h3>
               <p>
-                Pausas não resetam seu histórico. Veja sua evolução completa,
+                Pausas não apagam seu histórico. Veja sua evolução completa,
                 altos e baixos incluídos. Seu caminho é registrado com
                 honestidade.
               </p>
             </div>
 
             <div class="pillar">
-              <span class="pillar-icon">🎯</span>
-              <h3>Todo Seu Esforço Conta, Mesmo Quando a Vida Pesa</h3>
+              <span class="pillar-icon" aria-hidden="true">🎯</span>
+              <h3>Todo seu esforço conta, mesmo quando a vida pesa</h3>
               <p>
-                Cada treino gera progresso real. Conquistas que refletem sua
+                Cada atividade gera progresso real. Conquistas que refletem sua
                 dedicação, não sua capacidade de manter perfeição artificial.
               </p>
             </div>
           </div>
 
           <div class="manifesto-mantra">
-            <p>✨ Pausas não apagam história.</p>
+            <p>
+              <span aria-hidden="true">✨</span> Pausas não apagam história.
+            </p>
+          </div>
+
+          <div class="manifesto-link">
+            <a class="text-link" href="/metodologia"
+              >Ler a metodologia completa →</a
+            >
           </div>
         </div>
       </section>
 
       <section class="how-it-works" id="como-funciona">
         <div class="container">
-          <h2>Como o TrueStreak Registra Seu Processo</h2>
+          <h2>Como o TrueStreak registra seu processo</h2>
           <p class="section-subtitle">
             Diferente de apps que punem pausas, aqui você tem visibilidade real
             da sua jornada.
           </p>
 
-          <div class="examples">
+          <div class="examples" aria-label="Exemplos de registro">
             <div class="example-item">
-              <span class="example-status success">🟢</span>
+              <span class="example-status success" aria-hidden="true">🟢</span>
               <div class="example-text">
-                <strong>Treino feito:</strong>
+                <strong>Atividade feita:</strong>
                 <p>Conta para o seu progresso</p>
               </div>
             </div>
 
             <div class="example-item">
-              <span class="example-status neutral">⚪</span>
+              <span class="example-status neutral" aria-hidden="true">⚪</span>
               <div class="example-text">
                 <strong>Hoje não deu:</strong>
                 <p>Registrado sem punição</p>
@@ -119,7 +142,7 @@
             </div>
 
             <div class="example-item">
-              <span class="example-status complete">📆</span>
+              <span class="example-status complete" aria-hidden="true">📆</span>
               <div class="example-text">
                 <strong>Semana concluída:</strong>
                 <p>Mesmo com pausas, você evoluiu</p>
@@ -127,7 +150,7 @@
             </div>
 
             <div class="example-item">
-              <span class="example-status progress">📈</span>
+              <span class="example-status progress" aria-hidden="true">📈</span>
               <div class="example-text">
                 <strong>Progresso avaliado:</strong>
                 <p>Por constância, não por rigidez</p>
@@ -135,11 +158,11 @@
             </div>
           </div>
 
-          <div class="process-steps">
+          <div class="process-steps" aria-label="Passos do processo">
             <div class="step">
-              <div class="step-number">1</div>
+              <div class="step-number" aria-hidden="true">1</div>
               <div class="step-content">
-                <h3>Registre Seus Treinos</h3>
+                <h3>Registre suas atividades</h3>
                 <p>
                   Simples e rápido. Cada sessão fica registrada, criando um
                   histórico completo da sua dedicação.
@@ -148,9 +171,9 @@
             </div>
 
             <div class="step">
-              <div class="step-number">2</div>
+              <div class="step-number" aria-hidden="true">2</div>
               <div class="step-content">
-                <h3>Veja Seu Progresso Crescer</h3>
+                <h3>Veja seu progresso crescer</h3>
                 <p>
                   Acompanhe padrões e evolução real. Entenda seu ritmo e veja o
                   quanto você evoluiu, altos e baixos incluídos.
@@ -159,9 +182,9 @@
             </div>
 
             <div class="step">
-              <div class="step-number">3</div>
+              <div class="step-number" aria-hidden="true">3</div>
               <div class="step-content">
-                <h3>Seja Reconhecido Pelo Esforço</h3>
+                <h3>Seja reconhecido pelo esforço</h3>
                 <p>
                   Desbloqueie marcos que refletem sua dedicação. Celebre cada
                   vitória, grande ou pequena.
@@ -169,59 +192,66 @@
               </div>
             </div>
           </div>
+
+          <div class="how-it-works-link">
+            <a class="text-link" href="/metodologia"
+              >Entender a metodologia →</a
+            >
+          </div>
         </div>
       </section>
 
       <section class="values" id="valores">
         <div class="container">
-          <h2>Construído Para Quem Treina na Vida Real</h2>
+          <h2>Construído para quem se movimenta na vida real</h2>
           <p class="section-subtitle">
             Nossos valores guiam cada funcionalidade
           </p>
 
           <div class="values-grid">
             <div class="value-item">
-              <span class="value-check">✓</span>
+              <span class="value-check" aria-hidden="true">✓</span>
               <span>Valorização sobre cobrança</span>
             </div>
 
             <div class="value-item">
-              <span class="value-check">✓</span>
+              <span class="value-check" aria-hidden="true">✓</span>
               <span>Processo sobre perfeição</span>
             </div>
 
             <div class="value-item">
-              <span class="value-check">✓</span>
+              <span class="value-check" aria-hidden="true">✓</span>
               <span>Evolução sobre competição</span>
             </div>
 
             <div class="value-item">
-              <span class="value-check">✓</span>
+              <span class="value-check" aria-hidden="true">✓</span>
               <span>Reconhecimento sobre julgamento</span>
             </div>
 
             <div class="value-item">
-              <span class="value-check">✓</span>
+              <span class="value-check" aria-hidden="true">✓</span>
               <span>Consistência sobre intensidade</span>
             </div>
 
             <div class="value-item">
-              <span class="value-check">✓</span>
+              <span class="value-check" aria-hidden="true">✓</span>
               <span>Jornada sobre destino</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="cta-final">
+      <section class="cta-final" aria-label="Chamada para ação">
         <div class="container">
-          <h2>Comece a Registrar Sem Pressão</h2>
+          <h2>Comece a registrar sem pressão</h2>
           <p>
-            Não importa se você treina três vezes por semana ou está recomeçando
-            pela quinta vez. No TrueStreak, seu esforço sempre conta.
+            Não importa se você se movimenta três vezes por semana ou está
+            recomeçando pela quinta vez. No TrueStreak, seu esforço sempre
+            conta.
           </p>
           <a href="https://app.truestreak.life" class="btn btn-primary"
-            >Criar meu ciclo</a
+            >Criar meu ciclo de atividades</a
           >
           <p class="cta-note">
             Sem cobranças. Sem julgamentos. Só reconhecimento.
@@ -230,7 +260,7 @@
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" aria-label="Rodapé">
       <div class="container">
         <div class="footer-content">
           <div class="footer-section">
@@ -241,9 +271,11 @@
           <div class="footer-section">
             <h4>Produto</h4>
             <ul class="footer-links">
+              <li><a href="#inicio">Início</a></li>
               <li><a href="#manifesto">Manifesto</a></li>
               <li><a href="#como-funciona">Como Funciona</a></li>
               <li><a href="#valores">Valores</a></li>
+              <li><a href="/metodologia">Metodologia</a></li>
             </ul>
           </div>
 
@@ -257,7 +289,7 @@
         </div>
 
         <div class="footer-bottom">
-          <p>&copy; 2025 TrueStreak. Todos os direitos reservados.</p>
+          <p>&copy; 2026 TrueStreak. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
