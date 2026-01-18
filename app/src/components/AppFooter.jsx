@@ -1,9 +1,12 @@
 // app/src/components/AppFooter.jsx
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FeedbackModal from "./FeedbackModal";
+import { APP_VERSION } from "../version";
 import "./AppFooter.scss";
 
 const AppFooter = () => {
+  const navigate = useNavigate();
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   const handleFeedback = () => {
@@ -38,7 +41,7 @@ const AppFooter = () => {
           </div>
 
           <div className="footer-meta">
-            <p className="footer-version">v1.0.0</p>
+            <p className="footer-version">v{APP_VERSION}</p>
             <p className="footer-credit">
               Feito com <span className="heart">💜</span> por Samuel
             </p>
