@@ -53,3 +53,4 @@ coverage/
 misc/*.png
 
 firebase-emulator-data
+landing/public

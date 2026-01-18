@@ -1,0 +1,40 @@
+{
+  "title": "Metodologia TrueStreak: consistência real, sem perfeição",
+  "description": "Entenda a metodologia TrueStreak: um app fitness que mede presença, não perfeição. Progresso real com reconhecimento e uma sequência verdadeira.",
+  "canonical": "/metodologia/",
+  "keywords": "metodologia TrueStreak, app fitness, consistência, sequência verdadeira, treino real, progresso fitness, aplicativo treino",
+  "author": "Samuel Caetité",
+  "robots": "index,follow",
+  "ogType": "website",
+  "ogTitle": "Metodologia TrueStreak: consistência real, sem perfeição",
+  "ogDescription": "Conheça a metodologia por trás do TrueStreak, o app fitness que reconhece esforço real e mede presença, não perfeição.",
+  "ogImage": "/assets/og-metodologia.png",
+  "twitterCard": "summary_large_image",
+  "twitterTitle": "Metodologia TrueStreak",
+  "twitterDescription": "App fitness baseado em consistência real: medimos presença, não perfeição. Conheça nossa metodologia.",
+  "lang": "pt-BR",
+  "structuredData": {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Metodologia TrueStreak: consistência real, sem perfeição",
+    "description": "Entenda a metodologia TrueStreak: um app fitness que mede presença, não perfeição. Progresso real com reconhecimento e uma sequência verdadeira.",
+    "author": {
+      "@type": "Person",
+      "name": "Samuel Caetité"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TrueStreak",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "/assets/logo.png"
+      }
+    },
+    "datePublished": "2026-01-18",
+    "dateModified": "2026-01-18",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "/metodologia/"
+    }
+  }
+}
