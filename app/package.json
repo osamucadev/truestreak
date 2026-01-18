@@ -3,6 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "description": "TrueStreak - Fitness tracking app with gamification and achievement system",
+  "keywords": [
+    "fitness",
+    "workout-tracker",
+    "gamification",
+    "streak-tracking",
+    "react",
+    "firebase",
+    "progressive-web-app"
+  ],
+  "author": "Samuel Caetité",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

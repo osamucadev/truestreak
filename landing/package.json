@@ -1,7 +1,7 @@
 {
   "name": "truestreak",
   "version": "1.0.0",
-  "description": "Professional landing page showcasing React and React Native expertise",
+  "description": "Landing page for TrueStreak - Fitness tracking app with gamification",
   "scripts": {
     "clean": "node scripts/clean.js",
     "build:scss": "node scripts/build-scss.js",
@@ -16,18 +16,19 @@
     "watch:js": "node scripts/watch-js.js",
     "watch:html": "node scripts/watch-html.js",
     "watch:assets": "node scripts/watch-assets.js",
-    "serve": "firebase serve --port 5000",
-    "browser-sync": "browser-sync start --proxy \"localhost:5005\" --files \"public/**/*\" --no-notify --no-open",
+    "serve": "firebase serve --only hosting:truestreak-landing --port 5000",
+    "browser-sync": "browser-sync start --proxy \"localhost:5000\" --files \"public/**/*\" --no-notify --no-open",
     "dev": "concurrently --kill-others --names \"SCSS,JS,HTML,ASSETS,FIREBASE,BROWSER\" -c \"yellow,blue,green,magenta,cyan,red\" \"npm run watch:scss\" \"npm run watch:js\" \"npm run watch:html\" \"npm run watch:assets\" \"npm run serve\" \"npm run browser-sync\"",
     "start": "npm run build && npm run dev",
     "deploy": "npm run build && firebase deploy --only hosting:truestreak-landing"
   },
   "keywords": [
-    "portfolio",
-    "react",
-    "react-native",
-    "frontend",
-    "developer"
+    "fitness",
+    "workout-tracker",
+    "gamification",
+    "streak-tracking",
+    "progressive-web-app",
+    "fitness-motivation"
   ],
   "author": "Samuel Caetité",
   "license": "MIT",

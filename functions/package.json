@@ -1,7 +1,17 @@
 {
   "name": "truestreak-functions",
   "version": "1.0.0",
-  "description": "Cloud Functions for TrueStreak",
+  "description": "Cloud Functions for TrueStreak - Backend API and achievement system",
+  "keywords": [
+    "firebase",
+    "cloud-functions",
+    "serverless",
+    "workout-api",
+    "achievement-system",
+    "gamification"
+  ],
+  "author": "Samuel Caetité",
+  "license": "MIT",
   "main": "src/index.js",
   "type": "module",
   "scripts": {

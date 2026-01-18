@@ -3,22 +3,36 @@
   "version": "1.0.0",
   "private": true,
   "description": "O app de treino que não te pune por ser humano",
+  "keywords": [
+    "fitness",
+    "workout-tracker",
+    "gamification",
+    "streak-tracking",
+    "mental-health",
+    "progressive-web-app",
+    "react",
+    "firebase"
+  ],
+  "author": "Samuel Caetité",
+  "license": "MIT",
   "scripts": {
-    "dev:app": "cd app && npm run dev",
+    "dev:app": "cd app && npm run start",
+    "dev:landing": "cd landing && npm start",
     "dev:functions": "cd functions && npm run serve",
+    "dev:all": "concurrently --kill-others --names \"APP,LANDING,EMULATORS\" -c \"cyan,magenta,yellow\" \"npm run dev:app\" \"npm run dev:landing\" \"npm run emulators\"",
+    "dev:app-full": "concurrently --kill-others --names \"APP,EMULATORS\" -c \"cyan,yellow\" \"npm run dev:app\" \"npm run emulators\"",
+    "start": "npm run dev:all",
     "build:app": "cd app && npm run build",
+    "build:landing": "cd landing && npm run build",
+    "build:all": "npm run build:app && npm run build:landing",
     "deploy:app": "firebase deploy --only hosting:truestreak-app",
+    "deploy:landing": "firebase deploy --only hosting:truestreak-landing",
     "deploy:functions": "firebase deploy --only functions",
     "deploy": "firebase deploy",
     "emulators:fresh": "firebase emulators:start --only auth,functions,firestore --import=./firebase-emulator-data --export-on-exit",
     "emulators": "firebase emulators:start --only auth,functions,firestore --import=./firebase-emulator-data --export-on-exit"
   },
-  "keywords": [
-    "fitness",
-    "workout",
-    "gamification",
-    "mental-health"
-  ],
-  "author": "Samuel Caetité",
-  "license": "MIT"
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
