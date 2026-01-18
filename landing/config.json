@@ -1,0 +1,22 @@
+{
+  "site": {
+    "url": "https://truestreak.life",
+    "name": "TrueStreak - Todo Esforço Merece Ser Recompensado",
+    "defaultImage": "/assets/og-default.jpg"
+  },
+  "googleAnalytics": {
+    "measurementId": "G-XZVZW5BREB"
+  },
+  "robots": {
+    "disallow": ["/admin/"]
+  },
+  "favicons": {
+    "enabled": true,
+    "basePath": "/assets"
+  },
+  "seo": {
+    "autoInject": true,
+    "includeOpenGraph": true,
+    "includeTwitterCard": true
+  }
+}
