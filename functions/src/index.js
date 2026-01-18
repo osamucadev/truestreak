@@ -25,6 +25,8 @@ import {
 
 import { submitFeedback } from "./api/submitFeedback.js";
 
+import { submitReview } from "./api/submitReview.js";
+
 // Exportar todas as functions
 export {
   // Cycles
@@ -48,4 +50,7 @@ export {
 
   // Feedback
   submitFeedback,
+
+  // Review
+  submitReview,
 };
