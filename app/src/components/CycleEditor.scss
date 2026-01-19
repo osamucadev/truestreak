@@ -166,6 +166,110 @@
 }
 
 /* ========================================
+   IMPORT/EXPORT JSON
+   ======================================== */
+.import-export-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.json-import-area {
+  position: relative;
+  background: rgba(10, 12, 20, 0.5);
+  border: 1px solid rgba(122, 75, 255, 0.25);
+  border-radius: 14px;
+  padding: clamp(1.25rem, 2vw, 1.5rem);
+  margin-top: 1rem;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  // shine interno sutil
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      135deg,
+      rgba(122, 75, 255, 0.08) 0%,
+      rgba(122, 75, 255, 0) 35%,
+      rgba(122, 75, 255, 0) 100%
+    );
+    opacity: 0.4;
+  }
+
+  .form-label {
+    position: relative;
+    z-index: 1;
+  }
+
+  button {
+    margin-top: 1rem;
+    width: 100%;
+  }
+}
+
+.input-textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 1rem;
+  border: 1px solid rgba(122, 75, 255, 0.3);
+  border-radius: 10px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+
+  // fundo escuro para código
+  background: rgba(8, 10, 18, 0.75);
+  color: rgba(255, 255, 255, 0.92);
+
+  font-family: "Courier New", Consolas, Monaco, monospace;
+  resize: vertical;
+  transition: all 0.25s ease;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35),
+    inset 0 2px 4px rgba(0, 0, 0, 0.25);
+
+  &:focus {
+    outline: none;
+    border-color: rgba(122, 75, 255, 0.55);
+    background: rgba(8, 10, 18, 0.85);
+    box-shadow: 0 0 0 3px rgba(122, 75, 255, 0.15),
+      0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  &::placeholder {
+    color: rgba(235, 238, 255, 0.35);
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+
+  // scrollbar personalizada
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(122, 75, 255, 0.3);
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(122, 75, 255, 0.45);
+    }
+  }
+}
+
+/* ========================================
    EMPTY STATE
    ======================================== */
 .empty-state {
@@ -491,6 +595,83 @@
 }
 
 /* ========================================
+   BOTÕES GERAIS
+   ======================================== */
+.btn {
+  padding: clamp(0.85rem, 1.3vw, 1rem) clamp(1.25rem, 2.5vw, 1.75rem);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  border: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  letter-spacing: 0.01em;
+
+  &.ghost {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0px);
+    }
+  }
+
+  &.primary {
+    background: linear-gradient(
+      135deg,
+      rgba(122, 75, 255, 0.65),
+      rgba(91, 52, 214, 0.55)
+    );
+    color: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5),
+      0 10px 26px rgba(122, 75, 255, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(
+        135deg,
+        rgba(122, 75, 255, 0.75),
+        rgba(91, 52, 214, 0.65)
+      );
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-2px);
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.55),
+        0 14px 30px rgba(122, 75, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0px);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(122, 75, 255, 0.35),
+        0 20px 55px rgba(0, 0, 0, 0.55);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+}
+
+/* ========================================
    FOOTER ACTIONS
    ======================================== */
 .editor-actions {
@@ -617,6 +798,11 @@
       width: auto;
       min-width: 140px;
     }
+  }
+
+  .json-import-area button {
+    width: auto;
+    min-width: 180px;
   }
 }
 

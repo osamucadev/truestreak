@@ -16,6 +16,10 @@ const CycleEditor = ({ cycleToEdit }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Estados para importação/exportação JSON
+  const [showJsonImport, setShowJsonImport] = useState(false);
+  const [jsonInput, setJsonInput] = useState("");
+
   const handleAddDay = () => {
     const newDay = createEmptyDay(days.length);
     setDays([...days, newDay]);
@@ -60,6 +64,84 @@ const CycleEditor = ({ cycleToEdit }) => {
 
   const handleCancelEditDay = () => {
     setEditingDay(null);
+  };
+
+  // Função para importar treino a partir de JSON
+  const handleImportJson = () => {
+    try {
+      const parsed = JSON.parse(jsonInput);
+
+      // Validação básica da estrutura
+      if (!parsed.name || !Array.isArray(parsed.days)) {
+        setError("JSON inválido: precisa ter 'name' e 'days' (array)");
+        return;
+      }
+
+      // Valida e processa cada dia
+      const validatedDays = parsed.days.map((day, index) => {
+        if (!day.name) {
+          throw new Error(`Dia ${index + 1} precisa ter um nome`);
+        }
+
+        if (!Array.isArray(day.exercises)) {
+          throw new Error(`Dia "${day.name}" precisa ter 'exercises' (array)`);
+        }
+
+        return {
+          id: `day-${Date.now()}-${index}`,
+          name: day.name,
+          position: index,
+          isMandatory: day.isMandatory ?? true,
+          exercises: day.exercises.map((ex, exIndex) => {
+            if (!ex.name) {
+              throw new Error(
+                `Exercício ${exIndex + 1} do dia "${day.name}" precisa ter nome`
+              );
+            }
+
+            return {
+              id: `ex-${Date.now()}-${index}-${exIndex}`,
+              name: ex.name,
+              setsReps: ex.setsReps || "",
+              notes: ex.notes || "",
+              steps: ex.steps || [],
+              tips: ex.tips || [],
+            };
+          }),
+        };
+      });
+
+      // Aplica os dados importados
+      setCycleName(parsed.name);
+      setDays(validatedDays);
+      setJsonInput("");
+      setShowJsonImport(false);
+      setError("");
+    } catch (err) {
+      setError(`Erro ao importar JSON: ${err.message}`);
+    }
+  };
+
+  // Função para exportar o treino atual como JSON
+  const handleExportJson = () => {
+    const exportData = {
+      name: cycleName,
+      days: days.map((day) => ({
+        name: day.name,
+        isMandatory: day.isMandatory,
+        exercises: day.exercises.map((ex) => ({
+          name: ex.name,
+          setsReps: ex.setsReps,
+          notes: ex.notes,
+          steps: ex.steps,
+          tips: ex.tips,
+        })),
+      })),
+    };
+
+    const jsonString = JSON.stringify(exportData, null, 2);
+    navigator.clipboard.writeText(jsonString);
+    alert("JSON copiado para a área de transferência!");
   };
 
   const handleSave = async () => {
@@ -164,6 +246,59 @@ const CycleEditor = ({ cycleToEdit }) => {
             />
             <small>Use um nome que faça sentido pra você</small>
           </label>
+        </div>
+
+        {/* Seção de Importar/Exportar JSON */}
+        <div className="form-section">
+          <div className="section-header">
+            <h2>Importar/Exportar</h2>
+          </div>
+
+          <div className="import-export-actions">
+            <button
+              className="btn ghost"
+              onClick={() => setShowJsonImport(!showJsonImport)}
+              type="button"
+            >
+              {showJsonImport ? "✕ Fechar" : "📋 Importar JSON"}
+            </button>
+
+            {(cycleName || days.length > 0) && (
+              <button
+                className="btn ghost"
+                onClick={handleExportJson}
+                type="button"
+              >
+                💾 Exportar JSON
+              </button>
+            )}
+          </div>
+
+          {showJsonImport && (
+            <div className="json-import-area">
+              <label className="form-label">
+                <span>Cole o JSON do treino</span>
+                <textarea
+                  value={jsonInput}
+                  onChange={(e) => setJsonInput(e.target.value)}
+                  placeholder='{"name": "Treino ABC", "days": [...]}'
+                  className="input-textarea"
+                  rows={10}
+                />
+                <small>
+                  Cole a estrutura completa do treino em formato JSON
+                </small>
+              </label>
+
+              <button
+                className="btn primary"
+                onClick={handleImportJson}
+                type="button"
+              >
+                Importar
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="form-section">
