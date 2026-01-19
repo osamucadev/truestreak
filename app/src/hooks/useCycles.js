@@ -7,6 +7,11 @@ import {
   getActiveCycle as getActiveCycleAPI,
   getCycleHistory as getCycleHistoryAPI,
 } from "../services/cycles";
+import {
+  trackCycleCreated,
+  trackCycleEdited,
+  trackFirstCycleCreated,
+} from "../services/analytics";
 
 /**
  * Hook customizado para gerenciar ciclos de treino
@@ -46,8 +51,31 @@ export const useCycles = () => {
   const createCycle = async (cycleData) => {
     try {
       setError(null);
+
+      // Verificar se é o primeiro ciclo antes de criar
+      const isFirstCycle = !activeCycle;
+
       const result = await createCycleAPI(cycleData);
       await loadActiveCycle(); // Recarregar
+
+      // ANALYTICS: Rastrear criação de ciclo
+      const totalExercises =
+        cycleData.structure?.reduce(
+          (total, day) => total + (day.exercises?.length || 0),
+          0
+        ) || 0;
+
+      trackCycleCreated({
+        daysCount: cycleData.structure?.length || 0,
+        exercisesCount: totalExercises,
+        type: "custom",
+      });
+
+      // ANALYTICS: Rastrear primeiro ciclo se aplicável
+      if (isFirstCycle) {
+        trackFirstCycleCreated();
+      }
+
       return result;
     } catch (err) {
       console.error("Error creating cycle:", err);
@@ -61,6 +89,9 @@ export const useCycles = () => {
       setError(null);
       await updateCycleNameAPI(cycleId, newName);
       await loadActiveCycle(); // Recarregar
+
+      // ANALYTICS: Rastrear edição de ciclo
+      trackCycleEdited(cycleId);
     } catch (err) {
       console.error("Error updating cycle name:", err);
       setError(err.message);
@@ -73,6 +104,10 @@ export const useCycles = () => {
       setError(null);
       const result = await updateCycleStructureAPI(cycleId, data);
       await loadActiveCycle(); // Recarregar
+
+      // ANALYTICS: Rastrear edição de ciclo
+      trackCycleEdited(cycleId);
+
       return result;
     } catch (err) {
       console.error("Error updating cycle structure:", err);

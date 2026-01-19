@@ -9,6 +9,7 @@ import EmptyState from "../components/EmptyState";
 import TierUpModal from "../components/TierUpModal";
 import ChallengeCard from "../components/ChallengeCard";
 import { CHALLENGE_ORDER } from "../constants/challenges";
+import { trackPageView } from "../services/analytics";
 import "./Dashboard.scss";
 
 const Dashboard = () => {
@@ -24,6 +25,11 @@ const Dashboard = () => {
 
   const [tierUpQueue, setTierUpQueue] = useState([]);
   const [currentTierUp, setCurrentTierUp] = useState(null);
+
+  // ANALYTICS: Rastrear visualização da página
+  useEffect(() => {
+    trackPageView("dashboard");
+  }, []);
 
   // Listener para tier ups (vindos do localStorage após workout)
   useEffect(() => {

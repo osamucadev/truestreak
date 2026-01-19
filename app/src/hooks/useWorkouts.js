@@ -6,6 +6,12 @@ import {
   getWorkoutHistory as getWorkoutHistoryService,
   getCurrentStats as getCurrentStatsService,
 } from "../services/workouts";
+import {
+  trackWorkoutCompleted,
+  trackWorkoutSkipped,
+  trackFirstWorkoutCompleted,
+  trackStreakMilestone,
+} from "../services/analytics";
 
 export const useWorkouts = () => {
   const [stats, setStats] = useState(null);
@@ -49,13 +55,43 @@ export const useWorkouts = () => {
   const logWorkout = async (cycleId, dayId, completedExercises, notes = "") => {
     try {
       setError(null);
+
+      // Guardar stats atuais para comparar depois
+      const previousTotalWorkouts = stats?.totalWorkouts || 0;
+      const previousStreak = stats?.currentStreak || 0;
+
       const result = await logWorkoutService(
         cycleId,
         dayId,
         completedExercises,
         notes
       );
+
       setStats(result.stats);
+
+      // ANALYTICS: Rastrear treino completo
+      trackWorkoutCompleted({
+        cycleId,
+        dayIndex: dayId,
+        durationMinutes: null, // Caso tenha duração disponível, adicionar aqui
+        exercisesCompleted: completedExercises.length,
+        isFirstWorkout: previousTotalWorkouts === 0,
+      });
+
+      // ANALYTICS: Rastrear primeiro treino se aplicável
+      if (previousTotalWorkouts === 0) {
+        trackFirstWorkoutCompleted();
+      }
+
+      // ANALYTICS: Rastrear milestone de streak se atingiu
+      const newStreak = result.stats?.currentStreak || 0;
+      if (
+        newStreak !== previousStreak &&
+        [7, 30, 90, 365].includes(newStreak)
+      ) {
+        trackStreakMilestone(newStreak);
+      }
+
       return result;
     } catch (err) {
       setError(err.message);
@@ -73,6 +109,14 @@ export const useWorkouts = () => {
         nextDayChoice
       );
       setStats(result.stats);
+
+      // ANALYTICS: Rastrear treino pulado
+      trackWorkoutSkipped({
+        cycleId,
+        dayIndex: dayId,
+        reason, // "rest_day", "injury", "busy", etc
+      });
+
       return result;
     } catch (err) {
       setError(err.message);

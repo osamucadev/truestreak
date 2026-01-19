@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { auth, googleProvider, db } from "../firebase/config";
+import { trackLogin, trackSetUserId, trackSignUp } from "../services/analytics";
 
 const AuthContext = createContext({});
 
@@ -32,6 +33,8 @@ export const AuthProvider = ({ children }) => {
           displayName: firebaseUser.displayName,
           photoURL: firebaseUser.photoURL,
         });
+
+        trackSetUserId(firebaseUser.uid);
 
         // Check if user exists in Firestore, if not create
         await ensureUserExists(firebaseUser);
@@ -74,6 +77,8 @@ export const AuthProvider = ({ children }) => {
         achievements: [],
         history: [],
       });
+
+      trackSignUp("google");
     } else {
       // Update lastActiveAt
       await setDoc(
@@ -92,6 +97,9 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const result = await signInWithPopup(auth, googleProvider);
+
+      trackLogin("google");
+
       return result.user;
     } catch (error) {
       console.error("Error signing in with Google:", error);
