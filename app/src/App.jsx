@@ -80,7 +80,7 @@ function App() {
               }
             />
             <Route
-              path="/cycle/edit"
+              path="/cycle/edit/:cycleId"
               element={
                 <PrivateRoute>
                   <CycleEditorPage />
