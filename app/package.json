@@ -1,6 +1,6 @@
 {
   "name": "truestreak-app",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "private": true,
   "type": "module",
   "description": "TrueStreak - Fitness tracking app with gamification and achievement system",
