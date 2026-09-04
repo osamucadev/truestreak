@@ -4,9 +4,7 @@ import themes from "../themes/themes.json";
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("truestreak-theme") || "orange"
-  );
+  const [theme, setTheme] = useState("truestreak");
 
   useEffect(() => {
     const themeConfig = themes[theme];
