@@ -8,7 +8,9 @@ import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "COLE_AQUI_DEPOIS",
+  apiKey:
+    import.meta.env.VITE_FIREBASE_API_KEY ||
+    "AIzaSyBYZj3Xcd2iSOEbuRdWABqida2d9vRlvkk",
   authDomain:
     import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ||
     "truestreak-ed450.firebaseapp.com",
@@ -17,8 +19,10 @@ const firebaseConfig = {
     import.meta.env.VITE_FIREBASE_STORAGE_BUCKET ||
     "truestreak-ed450.firebasestorage.app",
   messagingSenderId:
-    import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "COLE_AQUI_DEPOIS",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "COLE_AQUI_DEPOIS",
+    import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "290700145400",
+  appId:
+    import.meta.env.VITE_FIREBASE_APP_ID ||
+    "1:290700145400:web:b8f9197254281aad24810d",
 };
 
 const app = initializeApp(firebaseConfig);
