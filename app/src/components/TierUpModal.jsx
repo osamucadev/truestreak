@@ -51,7 +51,7 @@ const TierUpModal = ({ tierUp, onClose }) => {
       <div className="tier-up-modal-overlay" onClick={onClose}>
         <div className="tier-up-modal" onClick={(e) => e.stopPropagation()}>
           <div className="modal-header">
-            <h2>🎉 PARABÉNS! 🎉</h2>
+            <h2>Um novo marco</h2>
           </div>
 
           <div className="tier-icon-container">

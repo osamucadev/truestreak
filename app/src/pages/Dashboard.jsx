@@ -10,11 +10,11 @@ import TierUpModal from "../components/TierUpModal";
 import ChallengeCard from "../components/ChallengeCard";
 import { CHALLENGE_ORDER } from "../constants/challenges";
 import { trackPageView } from "../services/analytics";
-import "./Dashboard.scss";
+import "./DashBoard.scss";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { activeCycle: cycle, loading: cycleLoading } = useCycles();
   const { stats, loading: statsLoading } = useWorkouts();
   const {
@@ -61,15 +61,6 @@ const Dashboard = () => {
     } else {
       setCurrentTierUp(null);
       reloadChallenges();
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      navigate("/login");
-    } catch (error) {
-      console.error("Error logging out:", error);
     }
   };
 
@@ -150,9 +141,6 @@ const Dashboard = () => {
             {cycle && <p className="cycle-name">{cycle.name}</p>}
           </div>
         </div>
-        <button className="btn-logout" onClick={handleLogout}>
-          Sair
-        </button>
       </header>
 
       {/* ✅ CONTEÚDO CONDICIONAL */}
@@ -162,24 +150,21 @@ const Dashboard = () => {
         <>
           <div className="stats-cards">
             <div className="stat-card">
-              <div className="stat-icon">🔥</div>
-              <div className="stat-info">
-                <h3>{stats?.currentStreak || 0}</h3>
-                <p>Streak Atual</p>
+                <div className="stat-info">
+                  <h3>{stats?.currentStreak || 0}</h3>
+                  <p>Ritmo atual</p>
               </div>
             </div>
 
             <div className="stat-card">
-              <div className="stat-icon">⭐</div>
-              <div className="stat-info">
+                <div className="stat-info">
                 <h3>{stats?.level || 1}</h3>
                 <p>Nível</p>
               </div>
             </div>
 
             <div className="stat-card">
-              <div className="stat-icon">💪</div>
-              <div className="stat-info">
+                <div className="stat-info">
                 <h3>{stats?.totalWorkouts || 0}</h3>
                 <p>Treinos</p>
               </div>
@@ -190,7 +175,7 @@ const Dashboard = () => {
           {challenges && featuredChallenge && (
             <div className="challenges-showcase">
               <div className="showcase-header">
-                <h3>🏆 Desafios</h3>
+                <h3>Marcos em andamento</h3>
                 {unviewedCount > 0 && (
                   <span className="unviewed-badge">{unviewedCount}</span>
                 )}
@@ -204,10 +189,10 @@ const Dashboard = () => {
 
               {unviewedCount > 0 && (
                 <div className="unviewed-alert">
-                  ⚠️ Você tem {unviewedCount}{" "}
+                  Você tem {unviewedCount}{" "}
                   {unviewedCount === 1 ? "conquista" : "conquistas"} não
                   visualizada
-                  {unviewedCount === 1 ? "" : "s"}!
+                  {unviewedCount === 1 ? "" : "s"}.
                 </div>
               )}
 
@@ -215,19 +200,19 @@ const Dashboard = () => {
                 className="btn-view-achievements"
                 onClick={() => navigate("/achievements")}
               >
-                Ver vitrine completa →
+                Ver todos os marcos →
               </button>
             </div>
           )}
 
           <div className="today-workout">
-            <h3>Próximo Treino</h3>
+            <h3>Próxima atividade</h3>
             {todayDay ? (
               <div className="workout-card">
                 <div className="workout-header">
                   <h4>{todayDay.name}</h4>
                   <span className="workout-badge">
-                    {todayDay.isMandatory ? "⚡ Obrigatório" : "✨ Opcional"}
+                    {todayDay.isMandatory ? "Planejado" : "Opcional"}
                   </span>
                 </div>
                 <div className="exercises-preview">
@@ -242,7 +227,7 @@ const Dashboard = () => {
                   className="btn-start-workout"
                   onClick={handleStartWorkout}
                 >
-                  Começar Treino
+                  Começar atividade
                 </button>
               </div>
             ) : (

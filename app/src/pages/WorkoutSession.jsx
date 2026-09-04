@@ -123,7 +123,7 @@ const WorkoutSession = () => {
 
       if (result.streakBroken) {
         // Mostrar mensagem de streak quebrado
-        alert("Sua streak foi zerada 😢");
+        alert("Esta pausa foi registrada. Seu histórico continua disponível.");
       }
 
       navigate("/");

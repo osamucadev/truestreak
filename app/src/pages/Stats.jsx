@@ -314,8 +314,8 @@ const Stats = () => {
     if (isEmpty) {
       return {
         icon: "🌱",
-        title: "Sua jornada começa aqui!",
-        text: "Você ainda não tem treinos registrados. Crie seu primeiro ciclo e comece a construir sua constância real. Cada grande jornada começa com um único passo.",
+        title: "Seu histórico começa aqui",
+        text: "Você ainda não tem atividades registradas. Quando quiser, crie seu primeiro ciclo para começar a acompanhar seu ritmo.",
       };
     }
 
@@ -331,8 +331,8 @@ const Stats = () => {
     if (daysSinceLastWorkout === 0) {
       return {
         icon: "💪",
-        title: "Mais um dia vencido!",
-        text: "Enquanto outros procrastinam, você age. Seu eu de amanhã agradece por não ter desistido hoje.",
+        title: "Atividade registrada hoje",
+        text: "Este registro já faz parte da sua história. Você pode acompanhar os detalhes abaixo.",
       };
     }
 
@@ -340,8 +340,8 @@ const Stats = () => {
     if (currentStreak === longestStreak && currentStreak > 7) {
       return {
         icon: "🏆",
-        title: "NOVO RECORDE PESSOAL!",
-        text: `${currentStreak} dias é seu melhor resultado até agora. Você está evoluindo, e isso não é sorte — é trabalho.`,
+        title: "Um novo marco no seu histórico",
+        text: `${currentStreak} dias é o seu período mais longo até agora. Esse dado permanece registrado mesmo quando seu ritmo mudar.`,
       };
     }
 
@@ -349,8 +349,8 @@ const Stats = () => {
     if (currentStreak > 14) {
       return {
         icon: "🔥",
-        title: "Você está em chamas!",
-        text: `${currentStreak} dias seguidos é coisa de quem leva a sério. Continue assim e você vai quebrar seu próprio recorde de ${longestStreak} dias.`,
+        title: "Um período de frequência alta",
+        text: `${currentStreak} dias seguidos registrados. Seu maior período foi de ${longestStreak} dias.`,
       };
     }
 
@@ -358,8 +358,8 @@ const Stats = () => {
     if (completionRate > 85) {
       return {
         icon: "⭐",
-        title: "Disciplina exemplar!",
-        text: `${completionRate}% de conclusão não mente. Você não está só fazendo treinos, você está construindo disciplina real. Parabéns!`,
+        title: "Boa parte do planejado foi realizada",
+        text: `${completionRate}% das atividades registradas foram concluídas. É um retrato do seu ritmo até aqui.`,
       };
     }
 
@@ -368,7 +368,7 @@ const Stats = () => {
       return {
         icon: "🌱",
         title: "Recomeçar é parte da jornada",
-        text: `Você já provou que consegue (${longestStreak} dias!), agora é só voltar ao ritmo. Um dia de cada vez.`,
+        text: `Seu histórico inclui um período de ${longestStreak} dias. Agora você está construindo um novo trecho, no ritmo possível.`,
       };
     }
 
@@ -376,8 +376,8 @@ const Stats = () => {
     if (daysSinceLastWorkout >= 3) {
       return {
         icon: "⏰",
-        title: "Sentimos sua falta!",
-        text: `Já faz ${daysSinceLastWorkout} dias... Que tal começar pequeno hoje? Até 10 minutos conta. O importante é não deixar virar hábito de parar.`,
+        title: "Seu histórico continua aqui",
+        text: `Você ficou ${daysSinceLastWorkout} dias sem registrar uma atividade. Quando quiser, continue daqui.`,
       };
     }
 
@@ -385,8 +385,8 @@ const Stats = () => {
     if (cantPercent > 70 && totalWorkouts > 10) {
       return {
         icon: "🎯",
-        title: "Você tem vontade!",
-        text: `${cantPercent}% dos seus skips são por motivo real (não posso). Isso mostra que você tem disciplina — só precisava da oportunidade. Continue assim!`,
+        title: "Pausas também mostram padrões",
+        text: `${cantPercent}% das pausas registradas foram marcadas como “não posso”. Este dado ajuda a entender seu contexto sem julgá-lo.`,
       };
     }
 
@@ -394,16 +394,16 @@ const Stats = () => {
     if (consistencyScore > 80) {
       return {
         icon: "💎",
-        title: "Consistência de diamante!",
-        text: `Score de ${consistencyScore}/100. Você não está brincando de treinar, você está construindo um estilo de vida. Inspirador!`,
+        title: "Um ritmo consistente neste período",
+        text: `Seu indicador atual é ${consistencyScore}/100, calculado a partir dos registros que você construiu até aqui.`,
       };
     }
 
     // Mensagem padrão
     return {
       icon: "💪",
-      title: "Continue sua jornada!",
-      text: `${totalWorkouts} treinos completos. Cada um deles te trouxe até aqui. Continue, a constância é seu superpoder.`,
+      title: "Seu processo até aqui",
+      text: `${totalWorkouts} atividades concluídas permanecem no seu histórico.`,
     };
   };
 
@@ -541,7 +541,7 @@ const Stats = () => {
         <div className="header-info">
           <h1>Suas Estatísticas</h1>
           <p className="subtitle">
-            Acompanhe sua evolução e celebre suas conquistas
+            Observe frequência, pausas e retornos ao longo do tempo
           </p>
         </div>
       </header>
@@ -606,7 +606,7 @@ const Stats = () => {
       </div>
 
       <div className="respiro-message">
-        <p>💫 Constância sem culpa. Cada treino é uma vitória.</p>
+        <p>Pausas mudam o ritmo, não apagam o que já foi construído.</p>
       </div>
 
       <div className="stats-advanced-grid">
@@ -866,7 +866,7 @@ const Stats = () => {
       )}
 
       <div className="closing-message">
-        <p>💪 Continue assim! Seu próximo treino te espera. Vamos nessa?</p>
+        <p>Quando quiser, sua próxima atividade está pronta para continuar daqui.</p>
         <button className="btn-primary" onClick={() => navigate("/")}>
           Voltar ao Dashboard
         </button>

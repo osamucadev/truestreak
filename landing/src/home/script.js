@@ -26,6 +26,7 @@ if (mobileMenuBtn) {
   mobileMenuBtn.addEventListener("click", () => {
     navLinks.classList.toggle("active");
     mobileMenuBtn.classList.toggle("active");
+    mobileMenuBtn.setAttribute("aria-expanded", navLinks.classList.contains("active"));
   });
 
   // Fechar menu ao clicar em um link
@@ -34,6 +35,7 @@ if (mobileMenuBtn) {
     link.addEventListener("click", () => {
       navLinks.classList.remove("active");
       mobileMenuBtn.classList.remove("active");
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
     });
   });
 }

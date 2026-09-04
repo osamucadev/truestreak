@@ -26,8 +26,8 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-card">
-        <img src="/logo.png" alt="TrueStreak" className="logo" />
-        <p className="subtitle">Sua jornada de constância real começa aqui</p>
+        <img src="/logo.svg" alt="TrueStreak" className="logo" />
+        <p className="subtitle">Entre para continuar sua história, no seu ritmo.</p>
 
         <button
           className="btn-google"
@@ -56,8 +56,8 @@ const Login = () => {
         </button>
 
         <p className="terms">
-          Ao continuar, você concorda com nossos <a href="#">Termos</a> e{" "}
-          <a href="#">Política de Privacidade</a>
+          Ao continuar, você concorda com nossos <a href="https://truestreak.life/termos">Termos</a> e{" "}
+          <a href="https://truestreak.life/privacidade">Política de Privacidade</a>
         </p>
 
         {error && <div className="error-message">{error}</div>}

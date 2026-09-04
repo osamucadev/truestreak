@@ -16,6 +16,8 @@ import Stats from "./pages/Stats";
 import DevTools from "./pages/Devtools";
 import Achievements from "./pages/Achievements";
 import AppFooter from "./components/AppFooter";
+import AppShell from "./components/AppShell";
+import "./styles/design-system.scss";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -29,7 +31,7 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
-  return user ? children : <Navigate to="/login" />;
+  return user ? <AppShell>{children}</AppShell> : <Navigate to="/login" />;
 };
 
 const PublicRoute = ({ children }) => {

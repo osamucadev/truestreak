@@ -36,16 +36,16 @@ const Achievements = () => {
             ← Voltar
           </button>
           <div className="header-info">
-            <h1>🏆 Vitrine de Troféus</h1>
-            <p className="subtitle">Suas conquistas e progressos</p>
+            <h1>Seus marcos</h1>
+            <p className="subtitle">Registros importantes da sua trajetória</p>
           </div>
         </header>
 
         <div className="empty-state">
           <div className="empty-icon">🏆</div>
-          <h2>Nenhuma conquista ainda</h2>
+          <h2>Seus marcos aparecerão aqui</h2>
           <p>
-            Complete seu primeiro treino para começar a desbloquear troféus!
+            Depois do primeiro registro, você poderá acompanhar os marcos construídos ao longo do tempo.
           </p>
           <button className="btn-primary" onClick={() => navigate("/")}>
             Ir para o Dashboard
@@ -75,8 +75,8 @@ const Achievements = () => {
           ← Voltar
         </button>
         <div className="header-info">
-          <h1>🏆 Vitrine de Troféus</h1>
-          <p className="subtitle">Suas conquistas e progressos</p>
+          <h1>Seus marcos</h1>
+          <p className="subtitle">Registros importantes da sua trajetória</p>
         </div>
       </header>
 

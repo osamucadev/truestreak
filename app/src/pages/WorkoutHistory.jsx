@@ -33,9 +33,9 @@ const WorkoutHistory = () => {
   };
 
   const getWorkoutIcon = (workout) => {
-    if (workout.skippedReason === "cant") return "🚫";
-    if (workout.skippedReason === "wont") return "💔";
-    if (workout.wasFullyCompleted) return "✅";
+    if (workout.skippedReason === "cant") return "—";
+    if (workout.skippedReason === "wont") return "—";
+    if (workout.wasFullyCompleted) return "✓";
     return "✓";
   };
 
@@ -84,7 +84,7 @@ const WorkoutHistory = () => {
           ← Voltar
         </button>
         <div className="header-info">
-          <h1>Histórico de Treinos</h1>
+          <h1>Sua história</h1>
           <p className="subtitle">
             {history.length}{" "}
             {history.length === 1 ? "treino registrado" : "treinos registrados"}
@@ -120,8 +120,8 @@ const WorkoutHistory = () => {
             <h2>Nenhum treino encontrado</h2>
             <p>
               {filter === "all"
-                ? "Comece sua jornada fazendo seu primeiro treino!"
-                : "Nenhum treino encontrado com esse filtro."}
+                ? "Seu histórico começa quando você fizer o primeiro registro."
+                : "Não há registros que correspondam a este filtro."}
             </p>
           </div>
         ) : (

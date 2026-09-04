@@ -132,9 +132,9 @@ function getFaviconsLinks(basePath = "/assets") {
   <link rel="icon" type="image/svg+xml" href="${basePath}/favicon.svg" />
   <link rel="shortcut icon" href="${basePath}/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="${basePath}/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="SC Dev" />
+  <meta name="apple-mobile-web-app-title" content="TrueStreak" />
   <link rel="manifest" href="${basePath}/site.webmanifest" />
-  <meta name="theme-color" content="#3b82f6">`;
+  <meta name="theme-color" content="#080910">`;
 }
 
 // Template de SEO Meta Tags
